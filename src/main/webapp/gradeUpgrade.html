@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Grade Management system</title>
+<link rel="icon" href="images/gms-logo.png" type="image/x-icon">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+function change(num)
+{
+	console.log("hello:"+num);
+	if(num=='last')
+	{
+	document.getElementById(num).value=0;
+	}
+var id=num;
+var previous=num-1;
+var after=num+1;
+var maxvalue ="";
+
+
+maxvalue =parseInt(document.getElementById(id).value);
+if(id%2==0)
+	{
+	var minvalue =1;
+	minvalue += parseInt(document.getElementById(previous).value);
+	if(minvalue>maxvalue)
+		{
+		console.log(minvalue+">"+maxvalue);
+		 document.getElementById("mesg").innerHTML="maximum mark should be greater than "+minvalue;
+		 document.getElementById(num).focus();
+		}
+	else
+	{
+		 document.getElementById("mesg").innerHTML="";	 
+		 let previousid=num-3;
+		 var previousValue =parseInt(document.getElementById(previousid).value)-1;
+		 console.log(previousValue);
+		if(previousValue>=maxvalue)
+			{
+			console.log(previousValue+"<"+maxvalue);
+			 document.getElementById(previousid).value=maxvalue+1;
+			}
+		else
+		{
+			console.log(minvalue+">"+maxvalue);
+			 document.getElementById("mesg").innerHTML="maximum mark should be less than "+previousValue;
+			 document.getElementById(num).focus();
+		}
+	}
+	}
+else
+{
+	var previousid=num+3;
+	console.log(previousid);
+	var previousmark =parseInt(document.getElementById(previousid).value);
+	 maxvalue =parseInt(document.getElementById(id).value);
+	 console.log(previousmark);
+	 var mark =parseInt(document.getElementById(num+1).value);
+	 console.log("check:"+mark);
+	 if(maxvalue<mark){
+	if(previousmark<maxvalue)
+		{
+		 document.getElementById("mesg").innerHTML="";
+		console.log(previousmark+"<"+maxvalue);
+		 document.getElementById(previousid).value=maxvalue-1;
+		}
+	else
+	{
+		 document.getElementById("mesg").innerHTML="minimum mark should be greater than "+previousmark;
+		 document.getElementById(num).focus();
+	}
+	 }
+	 else
+		 {
+		 document.getElementById("mesg").innerHTML="minimum mark should be less than "+mark;
+		 document.getElementById(num).focus();
+		 }
+}
+}
+function upgradeGrade()
+{
+	event.preventDefault();
+var num=0;
+var numb;
+for(alpha=65;alpha<91;alpha++)
+{
+	try{
+var str=String.fromCharCode(alpha);
+var grade=document.getElementById(str).value;
+var minmark=document.getElementById(++num).value;
+var maxmark=document.getElementById(++num).value;	
+numb=num;
+var formData = "grade=" + grade + "&minimummark=" + minmark+ "&maximummark=" + maxmark;
+console.log(formData);
+var url ="http://localhost:8080/GMS-api/FrontController/updateGrade.do?"+ formData;
+$.get(url, function(response){
+    console.log(grade +":" +response);
+});
+}
+	catch(err){ 
+		
+		var str=String.fromCharCode(alpha);
+		console.log(str);	
+	var grade=document.getElementById(str).value;
+	console.log(grade);
+	var minmark=document.getElementById('last').value;
+	console.log(minmark);
+	var maxmark=document.getElementById(numb+2).value;	
+	console.log(maxmark);
+	var formData = "grade=" + grade + "&minimummark=" + minmark+ "&maximummark=" + maxmark;
+	console.log(formData);
+	var url ="http://localhost:8080/GMS-api/FrontController/updateGrade.do?"+ formData;
+	$.get(url, function(response){
+		 console.log(grade +":" +response);
+	});
+}}}
+</script>
+</head>
+<body>
+<div id="mesg"></div>
+<form method="get" onsubmit="upgradeGrade()">
+<table align=center border=1>
+<tr><th>Grade</th><th>Minimum Mark</th><th>maximum mark</th></tr>
+<tr><td><input type=disabled id='A' value='A'></td><td><input type="number" name="1" value="75" id="1" min="1" max="100" onfocusout="change(1)" required></td><td><input type="number" id='2' value="100" min='0' max='100' onfocusout="change(2)" required></td></tr>
+<tr><td><input type=disabled name='a' id='B' value='B'></td><td><input type="number" name="3" id='3' value="55" min='0' max='100' onfocusout="change(3)" required></td><td><input type="number" id='4' value="74" min='0' max='100' onfocusout="change(4)" required></td></tr>
+<tr><td><input type=disabled name='a' id='C' value='C'></td><td><input type="number" name="5" id='5' value="35" min='0' max='100' onfocusout="change(5)" required></td><td><input type="number" id='6' value="54" min='0' max='100' onfocusout="change(6)" required></td></tr>
+<tr><td><input type=disabled name='a' id='D' value='D'></td><td><input type="number" name="7" id='last' value="0" min='0' max='100' onfocusout="change('last')" required></td><td><input type="number" id='8' value="34" min='0' max='100' onfocusout="change(8)" required></td></tr>
+
+<tr><td align=center colspan=3><button type="submit" class="btn btn-primary btn-xs">Update</button>&nbsp;&nbsp;&nbsp;<button type="reset" class="btn btn-primary btn-xs">Clear</button>
+</table></form>
+
+</body>
+
+</html>

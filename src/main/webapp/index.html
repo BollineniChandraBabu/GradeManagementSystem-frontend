@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login here</title>
+<style>
+legend {
+	display: block;
+	padding-left: 2px;
+	padding-right: 2px;
+	border: none;
+}
+</style>
+</head>
+<body>
+
+	<fieldset>
+		<legend align=center>Login here</legend>
+		<form method="post" action="/loginController" align=center>
+			<table bgcolor="#00FF00";>
+				<tr>
+					<td>User Id:</td>
+					<td><input type="email" name="email"
+						placeholder="example@gmail.com" required autofocus></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password"
+						placeholder="********" required></td>
+				</tr>
+				<tr>
+					<td colspan=2 align=center><input type="reset" value="reset">&nbsp&nbsp<input
+						type="button" value="submit" onclick="validateDetails()"></td>
+				</tr>
+			</table>
+		</form>
+	</fieldset>
+</body>
+</html>
