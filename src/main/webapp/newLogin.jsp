@@ -69,7 +69,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/login.do?"+ formData;
 					<form method="post" onsubmit="login()">
 						<div class="form-group">
 							<input type="email" class="form-control" name="email" id="email"
-								placeholder="Username" required="required">
+								placeholder="E-mail Id" required="required">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="password"

@@ -58,7 +58,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/checkDepartment.do?"+ fo
 function checkName()
 {
 	var name=document.getElementById("name").value;
-	var nameRegex=/^[A-Za-z]*$/;
+	var nameRegex= /^[A-Za-z\s]*$/;
 	if(nameRegex.test(name))
 	{
 	document.getElementById("registermsg").innerHTML="";
@@ -73,7 +73,7 @@ else
 function checkFName()
 {
 	var name=document.getElementById("fathername").value;
-	var nameRegex=/^[A-Za-z]*$/;
+	var nameRegex= /^[A-Za-z\s]*$/;
 	if(nameRegex.test(name))
 	{
 	document.getElementById("registermsg").innerHTML="";
@@ -114,7 +114,7 @@ funtion getMaxdate()
 		<div class="modal-dialog modal-login">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Add New Student</h4>
+					<h4 class="modal-title">Add Student</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 				</div>
@@ -134,8 +134,8 @@ funtion getMaxdate()
 								 required="required">
 						</div>
 						<div class="form-group">
-							<input type="number" class="form-control" name="department" id="department"
-								placeholder="department" required="required" onfocusout="checkDepartment()">
+							<input type="hidden" class="form-control" name="department" id="department"
+								placeholder="department" value='1' required="required" onfocusout="checkDepartment()">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="address" id="address"

@@ -16,7 +16,6 @@ function viewBySubjects(){
 	 content="<div class=container><br><br><br><form method='post' onsubmit='viewBySubject()'><div class='form-group'><input type='text' class='form-control' name='subjectdetail' id='subjectdetail' placeholder='subject code/name' required='required'></div><div class='form-group' align=center><button type='submit' class='btn btn-primary btn-xs'>Search</button>&nbsp<button type='reset' class='btn btn-primary btn-xs'>clear</button></div>"      
 document.getElementById("viewdetails").innerHTML=content;
 	     }
-	     
 function viewBySubject(){
 	 event.preventDefault();
 	      var subjectcode = document.getElementById("subjectdetail").value;
@@ -32,13 +31,13 @@ function viewBySubject(){
 	       {
 	       for( let mark of data)
 			{ 
-	       content+="<br><br>Subject Id="+mark.subjects.id+"&nbsp&nbsp&nbspSubject Name="+mark.subjects.name+"<br><br><table border=1><tr><th>Student ID</th><th>Student Name</th><th>Marks</th><th>Grade</th></tr>";
+		       content+="<table border=1><tr><th>Student ID</th><th>Student Name</th><th>Subject Name</th><th>Marks</th><th>Grade</th></tr>";
 			break;}
 		
 		for( let mark of data)
 			{
-			content +="<tr><td>"+mark.student.id +"</td><td>"+mark.student.name+"</td><td>"+mark.marks+ "</td><td>"+mark.grade+"</td></tr>";
-			}
+			content +="<tr><td>"+mark.student.id +"</td><td>"+mark.student.name+"</td><td>"+mark.subjects.name+"</td><td>"+mark.marks+ "</td><td>"+mark.grade+"</td></tr>";
+		}
 
 	       document.getElementById("viewdetails").innerHTML=content;
 	     }
@@ -86,10 +85,10 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th><th>Department</th></tr>";
+       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
        for( let users of data)
 		{
-			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td><td>"+users.department.name+"</td></tr>";
+			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td></tr>";
            }
        content+="</table>"
        document.getElementById("viewdetails").innerHTML=content;
@@ -121,15 +120,17 @@ function viewallmarks2(){
         var count=0;
         var total=0;
         for( let mark of data){
-			if(sid!==parseInt(mark.student.registrationNumber)){
+		try{	if(sid!==parseInt(mark.student.registrationNumber)){
 				if(total!=0)
 					{
 					console.log("count :"+count)
 					var sum=Math.ceil(total/6);
-					 var grade=(localStorage.getItem("grade"));
+					 var grade=calgrade(sum);
+					
 					console.log("return:" +grade);
 					content+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
 					content+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
+					 localStorage.removeItem("grade");
 					total=0;
 					count=0;
 					}
@@ -142,8 +143,13 @@ function viewallmarks2(){
 			content+=  "<tr><th colspan=2>"+mark.subjects.name +"</th><th colspan=2>"+mark.marks  +"</th></tr>";
 			total +=mark.marks;
   		  }
+		  catch(error){console.error(error);}}
         content+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
+        console.log("count :"+count)
+		var sum=Math.ceil(total/6);
+		 var grade=calgrade(sum);
 		content+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
+		 localStorage.removeItem("grade");
     content+="</table>"
         document.getElementById("viewdetails").innerHTML=content;
     });

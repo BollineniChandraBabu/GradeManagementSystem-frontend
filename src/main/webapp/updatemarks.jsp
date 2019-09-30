@@ -69,12 +69,12 @@ function insertMarks(){
       if(data)
       {
     
-    	   document.getElementById("marksinsertmsg").innerHTML="successfully inserted" ;
+    	   document.getElementById("marksinsertmsg").innerHTML="successfully inserted..." ;
     	   
        }
        else
            {
-    	   document.getElementById("marksinsertmsg").innerHTML="failed to insert";
+    	   document.getElementById("marksinsertmsg").innerHTML="successfully updated...";
            }
      });
     }
@@ -93,7 +93,7 @@ function insertMarks(){
 		<div class="modal-dialog modal-login">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">insert student marks</h4>
+					<h4 class="modal-title">update student marks</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 				</div>

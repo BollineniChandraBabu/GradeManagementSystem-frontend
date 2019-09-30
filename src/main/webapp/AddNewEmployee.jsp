@@ -74,7 +74,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/checkDepartment.do?"+ fo
 	function checkName()
 {
 	var name=document.getElementById("name").value;
-	var nameRegex=/^[A-Za-z]*$/;
+	var nameRegex= /^[A-Za-z\s]*$/;
 	if(nameRegex.test(name))
 	{
 	document.getElementById("registermsg").innerHTML="";
@@ -89,7 +89,7 @@ else
 function checkFName()
 {
 	var name=document.getElementById("fathername").value;
-	var nameRegex=/^[A-Za-z]*$/;
+	var nameRegex= /^[A-Za-z\s]*$/;
 	if(nameRegex.test(name))
 	{
 	document.getElementById("registermsg").innerHTML="";
@@ -111,7 +111,7 @@ else
 		<div class="modal-dialog modal-login">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Add new Employee</h4>
+					<h4 class="modal-title">Add Employee</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
 				</div>
@@ -137,7 +137,7 @@ else
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">Submit
 								</button>
-							&nbsp
+							&nbsp;
 							<button type="reset" class="btn btn-primary btn-xs">clear</button>
 						</div>					
 					</form>

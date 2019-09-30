@@ -49,21 +49,26 @@ function viewallmarks1(){
     
 
 function getGrade(total){
-    event.preventDefault();
+   
     var sum=total;
+   
     console.log("sum"+sum);
     var formData = "average=" + sum
     console.log("formData:"+formData);
     var data;
     var url ="http://localhost:8080/GMS-api/FrontController/getGrade.do?" + formData;
     $.get(url, function(response){
-        console.log(response); 
+        console.log("grade :"+response); 
        data=JSON.parse(response); 
-       window.localStorage.setItem('grade', 'A');
+       gradevalue=data;
+       console.log("gradevalue :"+gradevalue);
+       localStorage.setItem('grade', data);
        console.log("func:"+data);
+       return gradevalue;    
     }); 
+   
 
-     }
+}
      
 function viewGrade(){
     event.preventDefault();
@@ -198,5 +203,25 @@ $.get(url, function(response){
 	});
 }}}
     
-     
+function calgrade(sum){
+    event.preventDefault();
+    var url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
+    $.get(url, function(response){
+        console.log("response :"+response);
+        console.log("sum :"+sum);
+        localStorage.setItem('grades', response);
+     });
+    data=JSON.parse(localStorage.getItem('grades')); 
+    var finalgrade;
+    for(let g of data)
+    	{
+    	if(g.minMark<=sum && g.maxMark>=sum)
+    		{
+    		finalgrade=g.grade;
+    		break;
+    		}
+    	}
+    console.log(finalgrade);
+    return finalgrade;
+    }
     

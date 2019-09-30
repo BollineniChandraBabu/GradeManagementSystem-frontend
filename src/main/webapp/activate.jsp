@@ -45,7 +45,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/checkEmail.do?"+ formDat
        }
        else
        {
-    	   document.getElementById("activatemsg").innerHTML="email doesnot exist....";
+    	   document.getElementById("activatemsg").innerHTML="email doesn't exist....";
     	   document.getElementById("email").focus();
        }
      });
@@ -64,7 +64,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/checkdetails.do?"+ formD
        }
        else
        {
-    	   document.getElementById("activatemsg").innerHTML=" ID and email doesnot match....";
+    	   document.getElementById("activatemsg").innerHTML=" ID and email doesn't match....";
     	   document.getElementById("eid").focus();
        }
      });
@@ -112,11 +112,11 @@ function checkpassword(){
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" id="password"
-								placeholder="********" required="required" onfocus="checkdetails()">
+								placeholder="password" required="required" onfocus="checkdetails()">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="cpassword" id="cpassword"
-								placeholder="********" required="required" onfocusout="checkpassword()">
+								placeholder="password" required="required" onfocusout="checkpassword()">
 						</div>
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">activate</button>

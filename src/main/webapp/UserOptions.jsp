@@ -32,12 +32,12 @@ function viewBySubject(){
 	       {
 	       for( let mark of data)
 			{ 
-	       content+="<br><br>Subject Id="+mark.subjects.id+"&nbsp&nbsp&nbspSubject Name="+mark.subjects.name+"<br><br><table border=1><tr><th>Student ID</th><th>Student Name</th><th>Marks</th><th>Grade</th></tr>";
+	       content+="<table border=1><tr><th>Student ID</th><th>Student Name</th><th>Subject Name</th><th>Marks</th><th>Grade</th></tr>";
 			break;}
 		
 		for( let mark of data)
 			{
-			content +="<tr><td>"+mark.student.id +"</td><td>"+mark.student.name+"</td><td>"+mark.marks+ "</td><td>"+mark.grade+"</td></tr>";
+			content +="<tr><td>"+mark.student.id +"</td><td>"+mark.student.name+"</td><td>"+mark.subjects.name+"</td><td>"+mark.marks+ "</td><td>"+mark.grade+"</td></tr>";
 			}
 
 	       document.getElementById("viewdetails").innerHTML=content;
@@ -86,10 +86,10 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th><th>Department</th></tr>";
+       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
        for( let users of data)
 		{
-			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td><td>"+users.department.name+"</td></tr>";
+			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td></tr>";
            }
        content+="</table>"
        document.getElementById("viewdetails").innerHTML=content;
@@ -105,6 +105,26 @@ function displayName()
     document.getElementById("welcome").innerHTML="Welcome......     " + content;
    return name;
 }
+
+
+function viewGrades()
+{
+	    event.preventDefault();
+	    var url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
+	    $.get(url, function(response){
+	        console.log(response);
+	       var data=JSON.parse(response);
+	       var content="<br><br><br><table border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
+		for( let grades of data)
+			{
+			content +="<tr><td>"+grades.grade +"</td><td>"+grades.minMark+"</td><td>"+grades.maxMark+ "</td></tr>";
+			}
+
+	       
+	       document.getElementById("viewdetails").innerHTML=content;
+	     });
+	    }
+
 </script> 
 
 </head>
@@ -112,7 +132,7 @@ function displayName()
 	<h5 style="color: blue;" align="center"><div id="welcome"></div></h5>
 	<br>
 	<br>
-	<a href="" onclick="viewGrade()">View grade range</a>
+	<a href="" onclick="viewGrades()">View grade range</a>
 	<br>
 	<a href="" onclick="viewTop()">View topper Score</a>
 	<br>
