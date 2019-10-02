@@ -8,16 +8,34 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/viewGrades.js"></script>
 <script type="text/javascript" src="js/file.js"></script>
+<script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
+</script>
+
+<script>
+function getter(){
+var roles=(localStorage.getItem("role"));
+if(roles=='New')
+{
+	 window.location.href="index.jsp";
+}
+}
+</script>
+
+
 </head>
-<body>
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 <jsp:include page="LoginHeader.jsp"></jsp:include>
 <div class="container">
   <div class="row">
     <div class="col-sm">
     <jsp:include page="AdminOptions.jsp"></jsp:include>
     </div>
-     <div class="col-sm" id="viewdetails">
-    
+     <div class="col-sm" id="viewdetails"><br><br>
     </div>
     
     
@@ -28,4 +46,6 @@
   </div>
 		
 </body>
+<script>getter();</script>
+
 </html>

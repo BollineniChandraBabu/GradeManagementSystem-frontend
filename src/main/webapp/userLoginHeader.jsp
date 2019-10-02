@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<nav class="navbar navbar-expand-sm" style="background-color: orange;">
 			<a class="navbar-brand" href="#">Grade Management System</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarsExampleDefault"
@@ -33,5 +33,5 @@
 						target=_top>Logout</a></li>
 				</ul>
 			</div>
-		</nav>
+		</nav></div>
 </html>

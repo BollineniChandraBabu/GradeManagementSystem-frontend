@@ -32,14 +32,19 @@ var url ="http://localhost:8080/GMS-api/FrontController/login.do?"+ formData;
            
        if(data.roles)
            {
+ 		  document.getElementById('login').innerHTML = '<br><br><center><img src="images/squarespace-logo-symbol-black.gif" width=500px height=500px /></center>';
+		   sleep(20000);
     	   window.localStorage.setItem('role', 'Admin');
-           window.location.href="AdminLogin.jsp";
+               window.location.href="AdminLogin.jsp";
            }
        else
            {
+   		  document.getElementById('login').innerHTML = '<br><br><center><img src="images/squarespace-logo-symbol-black.gif" width=500px height=500px /></center>';
+    		 sleep(20000);
     	   window.localStorage.setItem('role', 'User');
            console.log("user login");
-           window.location.href="UserLogin.jsp";
+           
+   		     window.location.href="UserLogin.jsp";
            }
        }
        else
@@ -51,9 +56,20 @@ var url ="http://localhost:8080/GMS-api/FrontController/login.do?"+ formData;
      });
     }
 
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+ }
+</script>
+<script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
 </script>
 </head>
-<body>
+<body id="login" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<div id="myModal" class="modal fade">

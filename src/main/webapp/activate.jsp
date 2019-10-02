@@ -116,11 +116,11 @@ function checkpassword(){
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="cpassword" id="cpassword"
-								placeholder="password" required="required" onfocusout="checkpassword()">
+								placeholder="confirm password" required="required" onfocusout="checkpassword()">
 						</div>
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">activate</button>
-							&nbsp
+							&nbsp;
 							<button type="reset" class="btn btn-primary btn-xs">clear</button>
 						</div>					
 					</form>

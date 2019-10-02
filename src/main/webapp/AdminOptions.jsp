@@ -11,7 +11,7 @@
 <script>
 function viewBySubjects(){
 	 event.preventDefault();
-	   
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
   var content;
 	 content="<div class=container><br><br><br><form method='post' onsubmit='viewBySubject()'><div class='form-group'><input type='text' class='form-control' name='subjectdetail' id='subjectdetail' placeholder='subject code/name' required='required'></div><div class='form-group' align=center><button type='submit' class='btn btn-primary btn-xs'>Search</button>&nbsp<button type='reset' class='btn btn-primary btn-xs'>clear</button></div>"      
 document.getElementById("viewdetails").innerHTML=content;
@@ -64,6 +64,7 @@ function viewBySubject(){
 	     
 function viewEmployees(){
     event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
 var url ="http://localhost:8080/GMS-api/FrontController/viewEmployees.do";
     $.get(url, function(response){
         console.log(response);
@@ -80,6 +81,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewEmployees.do";
     }
 function viewStudents(){
     event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
 var url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
     $.get(url, function(response){
         console.log(response);
@@ -110,6 +112,7 @@ function displayName()
 
 function viewallmarks2(){
     event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
     var url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
     $.get(url, function(response){
         console.log(response);
@@ -151,14 +154,35 @@ function viewallmarks2(){
 		content+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
 		 localStorage.removeItem("grade");
     content+="</table>"
+        content+="<center><button onclick='printMarks();'><img src='images/printer.jpg' width=50px height=50px></button></center>"
         document.getElementById("viewdetails").innerHTML=content;
     });
      }
+     
+</script>
+
+<script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
+</script>
+
+<script>
+function printMarks() {
+	var printContents = document.getElementById("viewdetails").innerHTML;
+	var originalContents = document.body.innerHTML;
+	document.body.innerHTML = printContents;
+	window.print();
+	document.body.innerHTML = originalContents;
+}
 </script>
 
 
 </head>
-<body>
+
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 	<h5 style="color: blue;" align="center"><div id="welcome"></div></h5>
 	
 	
@@ -180,7 +204,7 @@ function viewallmarks2(){
 	<a href="" onclick="viewStudents()">View all students</a>
 	
 	<br>
-	<a href="" onclick="viewallmarks2()">View all Marks</a>
+	<a href="" onclick="viewallmarks2()">View all students Marks</a>
 	
 	<div id="output"></div>
 

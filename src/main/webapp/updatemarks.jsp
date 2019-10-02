@@ -113,8 +113,8 @@ function insertMarks(){
 								id="marks" placeholder="marks" required="required" min=0 max=100>
 						</div>
 						<div class="form-group" align=center>
-							<button type="submit" class="btn btn-primary btn-xs">insert</button>
-							&nbsp
+							<button type="submit" class="btn btn-primary btn-xs">submit</button>
+							&nbsp;
 							<button type="reset" class="btn btn-primary btn-xs">clear</button>
 						</div>
 					

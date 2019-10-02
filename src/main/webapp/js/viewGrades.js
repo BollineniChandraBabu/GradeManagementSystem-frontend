@@ -1,6 +1,7 @@
 
 function viewGrade1(){
     event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
     var url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
     $.get(url, function(response){
         console.log(response);
@@ -16,6 +17,7 @@ function viewGrade1(){
 
 function viewTop(){
     event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
     var url ="http://localhost:8080/GMS-api/FrontController/viewtop.do";
     $.get(url, function(response){
         console.log(response);
@@ -41,7 +43,8 @@ function viewTop(){
       
 function viewallmarks1(){
     event.preventDefault();
-    var url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
+   var url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
     $.get(url, function(response){
         console.log(response);
     });
@@ -72,6 +75,7 @@ function getGrade(total){
      
 function viewGrade(){
     event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
     var url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
     $.get(url, function(response){
         console.log(response);
