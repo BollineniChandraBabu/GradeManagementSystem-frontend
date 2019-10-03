@@ -130,8 +130,7 @@ funtion getMaxdate()
 								id="fathername" placeholder="Student father name" required="required" onfocusout="checkFName()">
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" name="dob" id="dob" max='2000-13-13'
-								 required="required">
+							<input type="date" class="form-control" name="dob" id="dob" required="required">
 						</div>
 						<div class="form-group">
 							<input type="hidden" class="form-control" name="department" id="department"
@@ -166,8 +165,13 @@ var yyyy = today.getFullYear()-'5';
         mm='0'+mm
     } 
 
-today = yyyy+'-'+mm+'-'+dd;
-document.getElementById("dob").setAttribute("max", today);
+var todayStr = yyyy+'-'+mm+'-'+dd;
+document.getElementById("dob").setAttribute("max", todayStr);
+var minyyyy = today.getFullYear()-'20';
+
+mintoday = minyyyy+'-'+mm+'-'+dd;
+document.getElementById("dob").setAttribute("min", mintoday);
+
 </script>
 
 </html>
