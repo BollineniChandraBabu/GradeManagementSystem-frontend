@@ -5,6 +5,7 @@
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/options.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/viewGrades.js"></script>
@@ -13,7 +14,7 @@ function viewBySubjects(){
 	 event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/squarespace-logo-symbol-black.gif" width=300px height=150px/>';
   var content;
-	 content="<div class=container><br><br><br><form method='post' onsubmit='viewBySubject()'><div class='form-group'><input type='text' class='form-control' name='subjectdetail' id='subjectdetail' placeholder='subject Id/name' required='required'></div><div class='form-group' align=center><button type='submit' class='btn btn-primary btn-xs'>Search</button>&nbsp<button type='reset' class='btn btn-primary btn-xs'>clear</button></div>"      
+	 content="<div class=container><br><form method='post' onsubmit='viewBySubject()'><div class='form-group'><input type='text' class='form-control' name='subjectdetail' id='subjectdetail' placeholder='subject Id/name' required='required'></div><div class='form-group' align=center><button type='submit' class='btn btn-primary btn-xs'>Search</button>&nbsp<button type='reset' class='btn btn-primary btn-xs'>clear</button></div>"      
 document.getElementById("viewdetails").innerHTML=content;
 	     }
 	     
@@ -71,7 +72,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewEmployees.do";
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Email</th><th>Date of joining</th><th>Department</th></tr>";
+       content="<br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Email</th><th>Date of joining</th><th>Department</th></tr>";
        for( let users of data)
 		{
 			content+="<tr><td>"+users.id+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.email+"</td><td>"+users.dateOfJoining+"</td><td>"+users.department.name+"</td></tr>";
@@ -88,7 +89,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
+       content="<br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
        for( let users of data)
 		{
 			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td></tr>";
@@ -117,7 +118,7 @@ function viewGrades()
 	    $.get(url, function(response){
 	        console.log(response);
 	       var data=JSON.parse(response);
-	       var content="<br><br><br><table border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
+	       var content="<br><table border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
 		for( let grades of data)
 			{
 			content +="<tr><td>"+grades.grade +"</td><td>"+grades.minMark+"</td><td>"+grades.maxMark+ "</td></tr>";
@@ -137,7 +138,7 @@ function viewallmarks2(){
         console.log(response);
         var data=JSON.parse(response);
         var content;
-        content="<br><br><br><table class='table table-hover' border=1>" ;
+        content="<br><table class='table table-hover' border=1>" ;
         var sid=0;
         var count=0;
         var total=0;
@@ -188,22 +189,16 @@ function printMarks() {
 
 </head>
 <body>
-	<h5 style="color: blue;" align="center"><div id="welcome"></div></h5>
-	<br>
-	<br>
+	
+	<div class="vertical-menu">
 	<a href="" onclick="viewGrades()">View grade range</a>
-	<br>
 	<a href="" onclick="viewTop()">View topper Score</a>
-	<br>
 	<a href="" onclick="viewBySubjects()">View by subject</a>
-	<br>
 	<a href="updatemarks.jsp" >Add Student Marks</a>
-	<br>
 	<a href="" onclick="viewStudents()">View all Students</a>
-	<br>
 	<a href="" onclick="viewallmarks2()">View all students Marks</a>
 	<div id="output"></div>
-
+</div>
 
 </body>
 <script>displayName();</script>

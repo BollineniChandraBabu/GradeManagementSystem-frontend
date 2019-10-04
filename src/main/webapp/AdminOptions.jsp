@@ -5,6 +5,7 @@
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/options.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/viewGrades.js"></script>
@@ -183,31 +184,20 @@ function printMarks() {
 </head>
 
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
-	<h5 style="color: blue;" align="center"><div id="welcome"></div></h5>
-	
-	
-	<br>
-	<br>
-	<a href="" onclick="viewGrade()">View grade range</a>
-	<br>
-	<a href="" onclick="viewTop()">View topper Score</a>
-	<br>
-	<a href="" onclick="viewBySubjects()">View by subject</a>
-	<br>
-	<a href="AddNewEmployee.jsp" >Add Employee</a>
-	<br>
-	<a href="" onclick="viewEmployees()">View all Employee's</a>
-	
-	<br>
-	<a href="AddNewStudent.jsp" >Add Student</a>
-	<br>
-	<a href="" onclick="viewStudents()">View all students</a>
-	
-	<br>
-	<a href="" onclick="viewallmarks2()">View all students Marks</a>
-	
-	<div id="output"></div>
 
+	
+	<div class="vertical-menu">
+	<br><br>
+ <a href="" onclick="viewGrade()">View grade range</a>
+ <a href="" onclick="viewTop()">View topper Score</a>
+ <a href="" onclick="viewBySubjects()">View by subject</a>
+ <a href="AddNewEmployee.jsp" >Add Employee</a>
+ <a href="" onclick="viewEmployees()">View all Employee's</a>
+ <a href="AddNewStudent.jsp" >Add Student</a>
+ <a href="" onclick="viewStudents()">View all students</a>
+ <a href="" onclick="viewallmarks2()">View all students Marks</a>
+ <div id="output"></div>
+</div>
 
 </body>
 <script>displayName();</script>

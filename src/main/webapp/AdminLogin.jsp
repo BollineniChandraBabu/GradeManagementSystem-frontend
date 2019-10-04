@@ -4,6 +4,7 @@
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/adminlook.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/viewGrades.js"></script>
@@ -25,11 +26,18 @@ if(roles=='New')
 }
 }
 </script>
-
-
 </head>
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 <jsp:include page="LoginHeader.jsp"></jsp:include>
+
+<div id="mySidenav" class="sidenav">
+  <a href="AdminLogin.jsp" id="about">Home</a>
+  <a href="contactus.jsp" id="blog">Contact Us</a>
+  <a href="logout.jsp" id="projects">Logout</a>
+</div>
+<br><br><br>
+	<h5 style="color: blue;" align="center"><div id="welcome"></div></h5>
+
 <div class="container">
   <div class="row">
     <div class="col-sm">
