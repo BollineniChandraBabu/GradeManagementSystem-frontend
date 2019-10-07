@@ -130,61 +130,6 @@ function viewGrades()
 	    }
 
 
-function viewallmarks2(){
-    event.preventDefault();
-	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-    var url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
-    $.get(url, function(response){
-        console.log(response);
-        var data=JSON.parse(response);
-        var content;
-        content="<br><table class='table table-hover' border=1>" ;
-        var sid=0;
-        var count=0;
-        var total=0;
-        for( let mark of data){
-		try{	if(sid!==parseInt(mark.student.registrationNumber)){
-				if(total!=0)
-					{
-					console.log("count :"+count)
-					var sum=Math.ceil(total/6);
-					 var grade=calgrade(sum);
-					
-					console.log("return:" +grade);
-					content+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
-					content+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
-					 localStorage.removeItem("grade");
-					total=0;
-					count=0;
-					}
-            sid=parseInt(mark.student.registrationNumber);
-        	content += "<tr><th>Student ID</th><th>"+mark.student.registrationNumber +"</th><th>Name</th><th>"+mark.student.name +"</th></tr>";
-			content+=  "<tr><th colspan=2>Subject Name</th><th colspan=2>Marks Secured</th></tr>";
-    		
-        	++count;
-			}
-			content+=  "<tr><th colspan=2>"+mark.subjects.name +"</th><th colspan=2>"+mark.marks  +"</th></tr>";
-			total +=mark.marks;
-  		  }
-		  catch(error){console.error(error);}}
-        content+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
-        console.log("count :"+count)
-		var sum=Math.ceil(total/6);
-		 var grade=calgrade(sum);
-		content+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
-		 localStorage.removeItem("grade");
-    content+="</table>"
-        content+="<center><button onclick='printMarks();'><img src='images/printer.jpg' width=50px height=50px></button></center>"
-        document.getElementById("viewdetails").innerHTML=content;
-    });
-     }
-function printMarks() {
-	var printContents = document.getElementById("viewdetails").innerHTML;
-	var originalContents = document.body.innerHTML;
-	document.body.innerHTML = printContents;
-	window.print();
-	document.body.innerHTML = originalContents;
-}
 </script> 
 
 </head>
@@ -196,6 +141,7 @@ function printMarks() {
 	<a href="" onclick="viewBySubjects()">View by subject</a>
 	<a href="updatemarks.jsp" >Add Student Marks</a>
 	<a href="" onclick="viewStudents()">View all Students</a>
+	  <a href="" onclick="viewbyid()">View student Marks</a>
 	<a href="" onclick="viewallmarks2()">View all students Marks</a>
 	<div id="output"></div>
 </div>

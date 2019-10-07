@@ -36,7 +36,14 @@ if(roles=='New')
   <a href="logout.jsp" id="projects">Logout</a>
 </div>
 <br><br><br>
-	<h5 style="color: blue;" align="center"><div id="welcome"></div></h5>
+	<h5 style="color: blue;" >
+	<div class="container">
+  <div class="row">
+    <div class="col-sm">
+	<div  id="welcome"></div></div>
+	 <div class="col-sm">
+	<div align="right" id="todaysDate"></div></div></div></div></h5>
+
 
 <div class="container">
   <div class="row">
@@ -55,5 +62,16 @@ if(roles=='New')
 		
 </body>
 <script>getter();</script>
-
+<script>
+function doDate()
+{
+    var str = "";
+    var days = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+    var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+    var now = new Date();
+    str += "Today is: " + days[now.getDay()] + ", " + now.getDate() + " " + months[now.getMonth()] + " " + now.getFullYear() + " " + now.getHours() +":" + now.getMinutes() + ":" + now.getSeconds();
+    document.getElementById("todaysDate").innerHTML = str;
+}
+setInterval(doDate, 1000);
+</script>
 </html>
