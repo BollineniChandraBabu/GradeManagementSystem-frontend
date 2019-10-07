@@ -70,9 +70,9 @@ function sleep(ms) {
 </script>
 </head>
 <body id="login" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="index.jsp"></jsp:include>
 
-	<div id="myModal" class="modal fade">
+	<div id="myModal" class="modal fade" align="center">
 		<div class="modal-dialog modal-login">
 			<div class="modal-content">
 				<div class="modal-header">

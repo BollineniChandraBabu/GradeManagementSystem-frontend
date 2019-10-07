@@ -65,21 +65,73 @@ function viewBySubject(){
 	     
 function viewEmployees(){
     event.preventDefault();
+  
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
 var url ="http://localhost:8080/GMS-api/FrontController/viewEmployees.do";
     $.get(url, function(response){
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Email</th><th>Date of joining</th><th>Department</th></tr>";
+       checkDepartments();
+       content="<br><br><div id='dept'> </div><br><table class='table table-hover' border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Email</th><th>Date of joining</th><th>Department</th></tr>";
        for( let users of data)
 		{
 			content+="<tr><td>"+users.id+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.email+"</td><td>"+users.dateOfJoining+"</td><td>"+users.department.name+"</td></tr>";
            }
+       
        content+="</table>"
        document.getElementById("viewdetails").innerHTML=content;
      });
     }
+function checkDepartments(){
+	
+	var url ="http://localhost:8080/GMS-api/FrontController/viewDepartments.do";
+    $.get(url, function(response){
+    	data=JSON.parse(response);
+    	console.log(data);
+    	var content="";
+    	
+    	content +="Select subject :<select class='custom-select custom-select-sm' id='bydept' onchange='viewEmployeesByDept()'>";
+    	content+="<option value='0'>--select--</option>";
+    	content+="<option value='all'>View All</option>";
+    	for(let department of data)
+    		{
+    		
+    		content+="<option value="+department.name+">"+department.name+"</option>";
+    		}
+       content+=" </select><p id='viewdetails'>";
+       document.getElementById("dept").innerHTML=content;
+     });
+    }
+function viewEmployeesByDept(){
+	
+    event.preventDefault();
+var url ="http://localhost:8080/GMS-api/FrontController/viewEmployees.do";
+    $.get(url, function(response){
+        console.log(response);
+       var data=JSON.parse(response);
+       var content;
+     
+  	var checkgrade = document.getElementById("bydept").value;
+     content="<br><div id='dept'></div><br><table class='table table-hover' border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Email</th><th>Date of joining</th><th>Subject</th></tr>";
+    
+
+     for( let users of data)
+		{
+    	 if(checkgrade==='all')
+         {
+    	 viewEmployees();
+			break;
+         }
+   		if(users.department.name===checkgrade)
+			content+="<tr><td>"+users.id+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.email+"</td><td>"+users.dateOfJoining+"</td><td>"+users.department.name+"</td></tr>";
+           }
+       content+="</table>"
+    	   checkDepartments();
+       document.getElementById("viewdetails").innerHTML=content;
+     });
+    }
+
 function viewStudents(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
@@ -88,7 +140,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><br><br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
+       content="<br><br><br><table class='table table-hover' border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
        for( let users of data)
 		{
 			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td></tr>";
@@ -138,5 +190,6 @@ function displayName()
 </div>
 
 </body>
-<script>displayName();</script>
+<script>
+displayName();</script>
 </html>

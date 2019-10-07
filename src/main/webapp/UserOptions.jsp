@@ -89,7 +89,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
         console.log(response);
        var data=JSON.parse(response);
        var content;
-       content="<br><table border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
+       content="<br><center>Viewing all Students details</center><table class='table table-hover' border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
        for( let users of data)
 		{
 			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.Address+"</td><td>"+users.dateOfBirth+"</td></tr>";
@@ -118,7 +118,7 @@ function viewGrades()
 	    $.get(url, function(response){
 	        console.log(response);
 	       var data=JSON.parse(response);
-	       var content="<br><table border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
+	       var content="<br><center>Available Grade Range....</center><br><table class='table table-hover' border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
 		for( let grades of data)
 			{
 			content +="<tr><td>"+grades.grade +"</td><td>"+grades.minMark+"</td><td>"+grades.maxMark+ "</td></tr>";
@@ -142,6 +142,7 @@ function viewGrades()
 	<a href="updatemarks.jsp" >Add Student Marks</a>
 	<a href="" onclick="viewStudents()">View all Students</a>
 	  <a href="" onclick="viewbyid()">View student Marks</a>
+	      <a href="" onclick="viewbygrade()">View Marks By Grade</a>
 	<a href="" onclick="viewallmarks2()">View all students Marks</a>
 	<div id="output"></div>
 </div>

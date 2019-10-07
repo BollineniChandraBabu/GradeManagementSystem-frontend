@@ -368,11 +368,16 @@ function viewallmarks2(){
 		 localStorage.removeItem("grade");
     content+="</table>"
         content+="<center><button onclick='printMarks();'><img src='images/printer.jpg' width=50px height=50px></button></center>"
-        document.getElementById("viewdetails").innerHTML=content;
+     
+            document.getElementById("viewdetails").innerHTML="Students Marks<div id='viewmarks'></div>";
+
+        	
+        	
+        	document.getElementById("viewmarks").innerHTML=content;
     });
      }
 function printMarks() {
-	let printContents = document.getElementById("viewdetails").innerHTML;
+	let printContents = document.getElementById("viewmarks").innerHTML;
 	let originalContents = document.body.innerHTML;
 	document.body.innerHTML = printContents;
 	window.print();
@@ -387,28 +392,37 @@ function viewbygrade()
     	data=JSON.parse(response);
     	console.log(data);
     	let content="";
-    	content +="<select class='custom-select custom-select-sm' id='bygrade' onchange='getMarksbygrade()'>";
+    	content +="<br>Select Grade :<select class='custom-select custom-select-sm' id='bygrade' onchange='getMarksbygrade()'>";
+		content+="<option value='select'>--select--</option>";
     	for(let grades of data)
     		{
     		console.log(grades.grade);
     		content+="<option value="+grades.grade+">"+grades.grade+"</option>";
     		}
-       content+=" </select> <p id='viewmarks'></p>";
+       content+=" </select><p id='viewdetails1'></p><br> <p id='viewmarks'></p>";
        document.getElementById("viewdetails").innerHTML=content;
     });  
 }
 
 function getMarksbygrade()
 {
+ 	document.getElementById("viewdetails1").innerHTML="";
 	 event.preventDefault();
+	  document.getElementById('viewmarks').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
 	 let checkgrade = document.getElementById("bygrade").value;
+     let content="";
+     let tempcontent="";
+     var globalcount=0;
+	 if(checkgrade==='select')
+	 {
+     	document.getElementById("viewmarks").innerHTML="<br><br><center>select grade to view Marks...</center>";
+     	return 0;
+	 }	
 	    let url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
 	    $.get(url, function(response){
 	        console.log(response);
 	        let data=JSON.parse(response);
-	        let content="";
-	        content="<br><table class='table table-hover' border=1>" ;
-	        var tempcontent="";
+	        content+="<table class='table table-hover' border=1>" ;
 	        let sid=0;
 	        let count=0;
 	        let total=0;
@@ -427,6 +441,8 @@ function getMarksbygrade()
 						tempcontent+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
 						tempcontent+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
 						if(grade===checkgrade){
+							globalcount=globalcount+1;
+					     	document.getElementById("viewdetails1").innerHTML="<br><center>Viewing Marks Based on Grade-"+checkgrade +"</center>";
 					        document.getElementById("viewmarks").innerHTML+=content+tempcontent;
 					        tempcontent="";
 						}
@@ -457,9 +473,10 @@ function getMarksbygrade()
 			 localStorage.removeItem("grade");
 	    content+="</table>"
 	        content+="<center><button onclick='printMarks();'><img src='images/printer.jpg' width=50px height=50px></button></center>"
-	      if(count===0)
+	        console.log("final count:" +globalcount);
+	        	if(globalcount===0)
 	      {
-		        document.getElementById("viewmarks").innerHTML="<br><br>No student secured Grade-"+checkgrade;
+		        document.getElementById("viewmarks").innerHTML="<br><br><center>No student secured Grade-"+checkgrade+"</center>";
 	      }
 	        	document.getElementById("viewmarks").innerHTML+=content;
 	    }); 

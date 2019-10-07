@@ -53,21 +53,19 @@ var url ="http://localhost:8080/GMS-api/FrontController/checkEmail.do?"+ formDat
     }
 
 function checkDepartment(){
-    event.preventDefault();
-  	var department = document.getElementById("department").value;
-    var formData ="department=" + department;
-    console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/checkDepartment.do?"+ formData;
+	var url ="http://localhost:8080/GMS-api/FrontController/viewDepartments.do";
     $.get(url, function(response){
-       var data=JSON.parse(response);
-       if(data.result==false){
-    	   document.getElementById("registermsg").innerHTML="department doesn't exist....";
-    	   document.getElementById("department").focus();
-       }
-       else
-           {
-    	   document.getElementById("registermsg").innerHTML="";
-           }
+    	data=JSON.parse(response);
+    	console.log(data);
+    	let content="";
+    	content +="Select Department :<select class='custom-select custom-select-sm' id='department'>";
+    	for(let department of data)
+    		{
+    		
+    		content+="<option value="+department.id+">"+department.name+"</option>";
+    		}
+       content+=" </select>";
+       document.getElementById("dept").innerHTML=content;
      });
     }
 	
@@ -119,32 +117,34 @@ else
 					<div id="registermsg" align=center style="color: red;"></div>
 					<form method="post" onsubmit="AddNewEmployee()">
 						<div class="form-group">
-							<input type="text" class="form-control" name="name"
-								id="name" placeholder="employee name" required="required" onfocusout="checkName()">
+							<input type="text" class="form-control" name="name" id="name"
+								placeholder="employee name" required="required"
+								onfocusout="checkName()">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="fathername"
-					id="fathername" placeholder="employee father name" required="required" onfocusout="checkFName()">
+								id="fathername" placeholder="employee father name"
+								required="required" onfocusout="checkFName()">
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-control" name="email" id="email"
-								placeholder="email" required="required" onfocusout="checkEmail()">
+								placeholder="email" required="required"
+								onfocusout="checkEmail()">
 						</div>
-						<div class="form-group">
-							<input type="number" class="form-control" name="department" id="department"
-								placeholder="department" required="required" onfocusout="checkDepartment()">
+						<div class="form-group" id="dept">
 						</div>
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">Submit
-								</button>
+							</button>
 							&nbsp;
 							<button type="reset" class="btn btn-primary btn-xs">clear</button>
-						</div>					
+						</div>
 					</form>
-				</div>			
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <script>msg();</script>
+<script>checkDepartment();</script>
 </html>
