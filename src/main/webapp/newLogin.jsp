@@ -12,7 +12,7 @@ function msg()
 	 $("#myModal").modal();
 }  
 </script>
-<script>
+<script> 
 function login(){
 	
     event.preventDefault();
@@ -21,12 +21,15 @@ function login(){
     var password = document.getElementById("password").value;
     var formData = "email=" + email + "&password=" + password;
     console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/login.do?"+ formData;
+var url ="http://localhost:9000/login?"+ formData;
     $.get(url, function(response){
-        console.log(response);
-       var data=JSON.parse(response);
+        console.log("response.id:"+response.id);
+        console.log("response:"+response);
+       var data=response;
+       console.log("data:"+data);
        window.localStorage.setItem('userdata', email);
-       if(data!=null){
+       if (data.length!=0)
+      {
            <%
            session.setAttribute("emails", "@gmail.com");%>
            
@@ -35,7 +38,7 @@ var url ="http://localhost:8080/GMS-api/FrontController/login.do?"+ formData;
  		  document.getElementById('login').innerHTML = '<br><br><center><img src="images/squarespace-logo-symbol-black.gif" width=500px height=500px /></center>';
 		   sleep(20000);
     	   window.localStorage.setItem('role', 'Admin');
-               window.location.href="AdminLogin.jsp";
+             window.location.href="AdminLogin.jsp";
            }
        else
            {
@@ -69,7 +72,8 @@ function sleep(ms) {
         }
 </script>
 </head>
-<body id="login" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+<body id="login" onLoad="noBack();"
+	onpageshow="if (event.persisted) noBack();" onUnload="">
 	<jsp:include page="index.jsp"></jsp:include>
 
 	<div id="myModal" class="modal fade" align="center">

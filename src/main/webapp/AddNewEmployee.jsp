@@ -22,7 +22,7 @@ function AddNewEmployee(){
     var department = document.getElementById("department").value;
     var formData ="name=" + name + "&fathername=" + fathername+ "&email=" + email + "&department=" + department;
     console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/addEmployee.do?"+ formData;
+var url ="http://localhost:9000/addEmployee?"+ formData;
     $.get(url, function(response){
         console.log("AddNewEmployee:"+response);
        var data=JSON.parse(response);
@@ -38,10 +38,11 @@ function checkEmail(){
   	var email = document.getElementById("email").value;
     var formData ="email=" + email;
     console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/checkEmail.do?"+ formData;
+var url ="http://localhost:9000/checkEmail?"+ formData;
     $.get(url, function(response){
-       var data=JSON.parse(response);
-       if(data.result){
+       var data=response;
+       console.log(data);
+       if(data){
     	   document.getElementById("registermsg").innerHTML="email id already exist....";
     	   document.getElementById("email").focus();
        }
@@ -53,9 +54,9 @@ var url ="http://localhost:8080/GMS-api/FrontController/checkEmail.do?"+ formDat
     }
 
 function checkDepartment(){
-	var url ="http://localhost:8080/GMS-api/FrontController/viewDepartments.do";
+	var url ="http://localhost:9000/viewDepartments";
     $.get(url, function(response){
-    	data=JSON.parse(response);
+    	data=response;
     	console.log(data);
     	let content="";
     	content +="Select Department :<select class='custom-select custom-select-sm' id='department'>";
@@ -131,8 +132,7 @@ else
 								placeholder="email" required="required"
 								onfocusout="checkEmail()">
 						</div>
-						<div class="form-group" id="dept">
-						</div>
+						<div class="form-group" id="dept"></div>
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">Submit
 							</button>

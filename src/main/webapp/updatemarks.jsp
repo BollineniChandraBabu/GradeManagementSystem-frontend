@@ -1,4 +1,4 @@
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,26 +13,39 @@ function msg()
 	 $("#myModal").modal();
 }  
 
-function checkStudentId(){
-    event.preventDefault();
-  	var id = document.getElementById("id").value;
-    var formData ="id=" + id;
-    console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/checkStudentId.do?"+ formData;
+function getStudents(){
+    let url ="http://localhost:9000/viewStudents";
     $.get(url, function(response){
-       var data=JSON.parse(response);
-       console.log(data);
-       if(data.name!=null){
-    	   document.getElementById("marksinsertmsg").innerHTML="Student Name: "+data.name ;
-    	   
-       }
-       else
-           {
-    	   document.getElementById("marksinsertmsg").innerHTML="student not exists...";
-    	   document.getElementById("id").focus();
-           }
-     });
-    }
+    	data=response;
+    	console.log(data);
+    	let content="";
+    	content +="<select class='custom-select custom-select-sm' id='id'>";
+    	for(let students of data)
+    		{
+    		console.log(students.registrationNumber+students.name);
+    		content+="<option value="+students.registrationNumber+">"+students.name+"</option>";
+    		}
+       content+=" </select>";
+       document.getElementById("student").innerHTML=content;
+    });  
+}
+function getSubjects(){
+    let url ="http://localhost:9000/viewAvailableSubjects";
+    $.get(url, function(response){
+    	data=response;
+    	console.log(data);
+    	let content="";
+    	content +="<select class='custom-select custom-select-sm' id='subject'>";
+    	for(let students of data)
+    		{
+    		console.log(students.id+students.name);
+    		content+="<option value="+students.id+">"+students.name+"</option>";
+    		}
+       content+=" </select>";
+       document.getElementById("subjects").innerHTML=content;
+    });  
+}
+
 function checksubjectId(){
     event.preventDefault();
     var subject = document.getElementById("subject").value;
@@ -62,20 +75,21 @@ function insertMarks(){
 	var marks = document.getElementById("marks").value;
     var formData="subjectdetails=" +subject.trim()+"&id=" +id +"&marks=" +marks; 
        console.log(formData);
-   var url ="http://localhost:8080/GMS-api/FrontController/insertMarks.do?"+formData;
+   var url ="http://localhost:9000/insertMarks?"+formData;
+   console.log(url);
   $.get(url, function(response){
       console.log(response);
-      var data=JSON.parse(response);
+      var data=response;
       if(data)
       {
-    
-    	   document.getElementById("marksinsertmsg").innerHTML="successfully inserted..." ;
-    	   
+    	   document.getElementById("marksinsertmsg").innerHTML="successfully added..." ; 
        }
        else
            {
     	   document.getElementById("marksinsertmsg").innerHTML="successfully updated...";
            }
+     }).fail(function() {
+  	   document.getElementById("marksinsertmsg").innerHTML="Marks Available";
      });
     }
 
@@ -100,24 +114,18 @@ function insertMarks(){
 				<div class="modal-body">
 					<div id="marksinsertmsg" align=center style="color: red;"></div>
 					<form method="post" onsubmit="insertMarks()">
+						<div class="form-group" id="student"></div>
+						<div class="form-group" id="subjects"></div>
 						<div class="form-group">
-							<input type="number" class="form-control" name="id" id="id"
-								placeholder="student id" required="required" onfocusout="checkStudentId()">
-						</div>
-						<div class="form-group">
-							<input type="number" class="form-control" name="subject"
-								id="subject" placeholder="subject code" required="required" onfocusout="checksubjectId()">
-						</div>
-						<div class="form-group">
-							<input type="number" class="form-control" name="marks"
-								id="marks" placeholder="marks" required="required" min=0 max=100>
+							<input type="number" class="form-control" name="marks" id="marks"
+								placeholder="marks" required="required" min=0 max=100>
 						</div>
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">submit</button>
 							&nbsp;
 							<button type="reset" class="btn btn-primary btn-xs">clear</button>
 						</div>
-					
+
 					</form>
 				</div>
 			</div>
@@ -125,4 +133,6 @@ function insertMarks(){
 	</div>
 </body>
 <script>msg();</script>
+<script>getStudents();</script>
+<script>getSubjects();</script>
 </html>

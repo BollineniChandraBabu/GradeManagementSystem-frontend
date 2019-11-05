@@ -2,10 +2,10 @@
 function viewGrade1(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-    let url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
+    let url ="http://localhost:9000/viewgrade";
     $.get(url, function(response){
         console.log(response);
-       let data=JSON.parse(response);
+       let data=response;
        let content="<br><br><br><table border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
 	for( let grades of data)
 		{
@@ -18,20 +18,20 @@ function viewGrade1(){
 function viewTop(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-    let url ="http://localhost:8080/GMS-api/FrontController/viewtop.do";
+    let url ="http://localhost:9000/viewtop";
     $.get(url, function(response){
         console.log(response);
-        let data=JSON.parse(response);
+        let data=response;
         let count=0;
         let total=0;
         let sid=0;
-        let content="<br><br><br><table class='table table-hover' border='1'><tr><th>Registration number</th><th>Name</th></tr>";
+        let content= "<br><div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse'>Viewing Topper Details....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
+       content+="<table class='table table-hover' border='1'><tr><th>Registration number</th><th>Name</th></tr>";
  	for( let marks of data)
  		{
- 		content +="<tr><td>"+marks.student.registrationNumber+"</td><td>"+marks.student.name+"</td></tr></table><br>";
+ 		content +="<tr><td>"+marks.student.registrationNumber+"</td><td>"+marks.student.name+"</td></tr></table>";
  		break;
  		}
-
         let contents="<table class='table table-hover' border=1><tr><th>Subject Id</th><th>Subject Name</th><th>Marks</th></tr>";
      	for(let mark of data)
     		{
@@ -44,7 +44,7 @@ function viewTop(){
 		
 		console.log("return:" +grade);
 		contents+=  "<tr><th>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
-		contents+=  "<tr><th>Grade :</th><th colspan=2>"+grade  +"</th></tr></table>";
+		contents+=  "<tr><th>Grade :</th><th colspan=2>"+grade  +"</th></tr></table></div></div></div></div></div>";
 	
      	 document.getElementById("viewdetails").innerHTML=content+contents;
         
@@ -54,7 +54,7 @@ function viewTop(){
 function viewallmarks1(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-   let url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
+   let url ="http://localhost:9000/viewallmarks";
     $.get(url, function(response){
         console.log(response);
     });
@@ -62,17 +62,15 @@ function viewallmarks1(){
     
 
 function getGrade(total){
-   
     let sum=total;
-   
     console.log("sum"+sum);
     let formData = "average=" + sum
     console.log("formData:"+formData);
     let data;
-    let url ="http://localhost:8080/GMS-api/FrontController/getGrade.do?" + formData;
+    let url ="http://localhost:9000/getGrade?" + formData;
     $.get(url, function(response){
         console.log("grade :"+response); 
-       data=JSON.parse(response); 
+       data=response; 
        gradevalue=data;
        console.log("gradevalue :"+gradevalue);
        localStorage.setItem('grade', data);
@@ -86,29 +84,31 @@ function getGrade(total){
 function viewGrade(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-    let url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
+    let url ="http://localhost:9000/viewgrade";
     $.get(url, function(response){
         console.log(response);
         let c=0;
         let m=0;
-       let data=JSON.parse(response);
-       let content="<br><div align='center' id='mesg'></div><form method='get' onsubmit='upgradeGrade()'><table class='table table-hover' border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
+        let globalcount=100;
+       let data=response;
+       let content="<br><div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse'>Available Grades....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
+       content+="<div align='center' id='mesg'></div><form method='get' onsubmit='upgradeGrade()'><table class='table table-hover' border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
 	for( let grades of data)
 		{
 		if(grades.minMark!=0 && grades.maxMark!=100){
-		content +="<tr><td><input type='text' value="+grades.grade+" id="+grades.grade+" disabled minlength='1' maxlength='1'></td><td><input type='number' value="+grades.minMark  +" id="+ ++m  +" min='0' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td><td><input type='number' value="+grades.maxMark  +" id="+ ++m  +" min='1' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td></tr>";
+		content +="<tr><td><input type='text' value="+grades.grade +" id="+ ++globalcount +" disabled minlength='1' maxlength='1'></td><td><input type='number' value="+grades.minMark  +" id="+ ++m  +" min='0' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td><td><input type='number' value="+grades.maxMark  +" id="+ ++m  +" min='1' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td></tr>";
 		console.log(c+":"+m);
 		}
 		if(grades.minMark==0){
-			content +="<tr><td><input type='text' value="+grades.grade+" id="+grades.grade+" disabled minlength='1' maxlength='1'></td><td><input type='number' disabled value="+grades.minMark  +" id="+ ++m  +" min='0' max='100' onfocusout='change("+m +")' required>"+"</td><td><input type='number' value="+grades.maxMark  +" id="+ ++m  +" min='1' max='100'  onfocusout='change("+m +")' required>"+"</td></tr>";
+			content +="<tr><td><input type='text' value="+grades.grade +" id="+ ++globalcount +" disabled minlength='1' maxlength='1'></td><td><input type='number' disabled value="+grades.minMark  +" id="+ ++m  +" min='0' max='100' onfocusout='change("+m +")' required>"+"</td><td><input type='number' value="+grades.maxMark  +" id="+ ++m  +" min='1' max='100'  onfocusout='change("+m +")' required>"+"</td></tr>";
 			console.log(c+":"+m);
 			}
 		if(grades.maxMark==100){
-			content +="<tr><td><input type='text' value="+grades.grade+" id="+grades.grade+" disabled minlength='1' maxlength='1'></td><td><input type='number' value="+grades.minMark  +" id="+ ++m  +" min='0' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td><td><input type='number' disabled value="+grades.maxMark  +" id="+ ++m  +" min='1' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td></tr>";
+			content +="<tr><td><input type='text' value="+grades.grade +" id="+ ++globalcount +" disabled minlength='1' maxlength='1'></td><td><input type='number' value="+grades.minMark  +" id="+ ++m  +" min='0' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td><td><input type='number' disabled value="+grades.maxMark  +" id="+ ++m  +" min='1' max='100' oninput='change("+m +")' onfocusout='change("+m +")' required>"+"</td></tr>";
 			console.log(c+":"+m);
 			}
 		}
-	content +="<tr><td align=center colspan=3><button type='submit' class='btn btn-primary btn-xs' id='upgradebutton'>Update</button></table></form>";
+	content +="<tr><td align=center colspan=3><button type='submit' class='btn btn-primary btn-xs' id='upgradebutton'>Update</button></table></form></div></div></div></div></div>";
        document.getElementById("viewdetails").innerHTML=content;
      });
     }
@@ -202,26 +202,26 @@ function upgradeGrade()
 	event.preventDefault();
 let num=0;
 let numb;
-for(alpha=65;alpha<91;alpha++)
+for(globalcount=100;globalcount<125;globalcount++)
 {
 	try{
-let str=String.fromCharCode(alpha);
-let grade=document.getElementById(str).value;
+let grade=document.getElementById(globalcount).value;
+console.log("globalcount :"+globalcount);
 let minmark=document.getElementById(++num).value;
 let maxmark=document.getElementById(++num).value;	
 numb=num;
 let formData = "grade=" + grade + "&minimummark=" + minmark+ "&maximummark=" + maxmark;
 console.log(formData);
-let url ="http://localhost:8080/GMS-api/FrontController/updateGrade.do?"+ formData;
+let url ="http://localhost:9000/updateGrade?"+ formData;
+console.log(url);
 $.get(url, function(response){
 	 document.getElementById("mesg").innerHTML="successfully updated....";
 });
 }
 	catch(err){ 
-		
-		let str=String.fromCharCode(alpha);
-		console.log(str);	
-	let grade=document.getElementById(str).value;
+		/*console.log(err.message);
+		console.log(globalcount);	
+	let grade=document.getElementById(globalcount).value;
 	console.log(grade);
 	let minmark=document.getElementById('last').value;
 	console.log(minmark);
@@ -229,27 +229,28 @@ $.get(url, function(response){
 	console.log(maxmark);
 	let formData = "grade=" + grade + "&minimummark=" + minmark+ "&maximummark=" + maxmark;
 	console.log(formData);
-	let url ="http://localhost:8080/GMS-api/FrontController/updateGrade.do?"+ formData;
+	let url ="http://localhost:9000/updateGrade?"+ formData;
+	console.log(url);
 	$.get(url, function(response){
 		 console.log(grade +":" +response);
-	});
+	});*/
 }}}
     
 function calgrade(sum){
     event.preventDefault();
-    let url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
+    let url ="http://localhost:9000/viewgrade";
     $.get(url, function(response){
         console.log("response :"+response);
         console.log("sum :"+sum);
-        localStorage.setItem('grades', response);
+        localStorage.setItem('grades', JSON.stringify(response));
      });
     data=JSON.parse(localStorage.getItem('grades')); 
     let finalgrade;
-    for(let g of data)
+    for(let grades of data)
     	{
-    	if(g.minMark<=sum && g.maxMark>=sum)
+    	if(grades.minMark<=sum && grades.maxMark>=sum)
     		{
-    		finalgrade=g.grade;
+    		finalgrade=grades.grade;
     		break;
     		}
     	}
@@ -260,10 +261,10 @@ function getMarks(){
 	 event.preventDefault();
 	 let studentid = document.getElementById("studentid").value;
 	 let formData = "studentid=" + studentid;
-	 let url ="http://localhost:8080/GMS-api/FrontController/viewStudentMarks.do?"+ formData;
+	 let url ="http://localhost:9000/viewStudentMarks?"+ formData;
 	    $.get(url, function(response){
 	    	 console.log(response);
-	         let data=JSON.parse(response);
+	         let data=response;
 	         let content;
 	         content="<table class='table table-hover' border=1>" ;
 	         let count=0;
@@ -303,18 +304,19 @@ function getMarks(){
 
 function viewbyid(){
     event.preventDefault();
-    let url ="http://localhost:8080/GMS-api/FrontController/viewStudents.do";
+    let url ="http://localhost:9000/viewStudents";
     $.get(url, function(response){
-    	data=JSON.parse(response);
+    	data=response;
     	console.log(data);
     	let content="";
+    	content+="  <div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' >Select Student....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
     	content +="<select class='custom-select custom-select-sm' id='studentid' onchange='getMarks()'>";
     	for(let students of data)
     		{
     		console.log(students.registrationNumber+students.name);
     		content+="<option value="+students.registrationNumber+">"+students.name+"</option>";
     		}
-       content+=" </select> <p id='viewmarks'></p>";
+       content+=" </select></div></div></div></div> <p id='viewmarks'></p>";
        document.getElementById("viewdetails").innerHTML=content;
     });  
 }
@@ -326,12 +328,12 @@ function viewbyid(){
 function viewallmarks2(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-    let url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
+    let url ="http://localhost:9000/viewallmarks";
     $.get(url, function(response){
         console.log(response);
-        let data=JSON.parse(response);
+        let data=response;
         let content;
-        content="<br><table class='table table-hover' border=1>" ;
+        content="<table class='table table-hover' border=1>" ;
         let sid=0;
         let count=0;
         let total=0;
@@ -369,7 +371,7 @@ function viewallmarks2(){
     content+="</table>"
         content+="<center><button onclick='printMarks();'><img src='images/printer.jpg' width=50px height=50px></button></center>"
      
-            document.getElementById("viewdetails").innerHTML="Students Marks<div id='viewmarks'></div>";
+            document.getElementById("viewdetails").innerHTML="  <div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' >Viewing All Students Marks....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'><div id='viewmarks'></div></div></div></div></div></div>";
 
         	
         	
@@ -387,9 +389,9 @@ function printMarks() {
 function viewbygrade()
 {
 	event.preventDefault();
-    let url ="http://localhost:8080/GMS-api/FrontController/viewgrade.do";
+    let url ="http://localhost:9000/viewgrade";
     $.get(url, function(response){
-    	data=JSON.parse(response);
+    	data=response;
     	console.log(data);
     	let content="";
     	content +="<br>Select Grade :<select class='custom-select custom-select-sm' id='bygrade' onchange='getMarksbygrade()'>";
@@ -418,10 +420,10 @@ function getMarksbygrade()
      	document.getElementById("viewmarks").innerHTML="<br><br><center>select grade to view Marks...</center>";
      	return 0;
 	 }	
-	    let url ="http://localhost:8080/GMS-api/FrontController/viewallmarks.do";
+	    let url ="http://localhost:9000/viewallmarks";
 	    $.get(url, function(response){
 	        console.log(response);
-	        let data=JSON.parse(response);
+	        let data=response;
 	        content+="<table class='table table-hover' border=1>" ;
 	        let sid=0;
 	        let count=0;
@@ -481,4 +483,21 @@ function getMarksbygrade()
 	        	document.getElementById("viewmarks").innerHTML+=content;
 	    }); 
 }
+function viewStudents(){
+    event.preventDefault();
+	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
+var url ="http://localhost:9000/viewStudents";
+    $.get(url, function(response){
+       var data=response;
+       var content;
+       content="<div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' >Viewing All Students Details....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
+       content+="<table class='table table-hover' border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
+       for( let users of data)
+		{
+			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.address+"</td><td>"+users.dateOfBirth+"</td></tr>";
+           }
+       content+="</table>"
+       document.getElementById("viewdetails").innerHTML=content;
+     });
+    }    
 

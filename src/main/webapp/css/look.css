@@ -1,11 +1,9 @@
-
 body {
-
-  background-image: url('../images/gms.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
- opacity: 1;
-      filter: alpha(opacity=30); 
+	background-image: url('../images/gms.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	opacity: 1;
+	filter: alpha(opacity = 30);
 }

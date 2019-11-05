@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Grade Management system</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-	<nav class="navbar navbar-expand-sm" style="background-color: orange;">
+		<nav class="navbar navbar-expand-sm" style="background-color: orange;">
 			<a class="navbar-brand" href="#">Grade Management System</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarsExampleDefault"
@@ -20,8 +20,13 @@
 
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/GMS-frontend/index.jsp"
-						target=_top>Home <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/GMS-frontend/index.jsp" target=_top>Home <span
+							class="sr-only">(current)</span></a></li>
+							
+							
+							<li class="nav-item"><a class="nav-link"
+						href="/GMS-frontend/viewMarks.jsp" target=_top>Student Blog</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/GMS-frontend/newLogin.jsp" target=_top>Login</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -30,5 +35,6 @@
 						href="/GMS-frontend/contactus.jsp" target=_top>contact us</a></li>
 				</ul>
 			</div>
-		</nav></div>
+		</nav>
+	</div>
 </html>

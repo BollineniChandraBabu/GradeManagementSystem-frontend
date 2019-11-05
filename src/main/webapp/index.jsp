@@ -13,12 +13,15 @@
         }
 </script>
 </head>
-<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();"
+	onUnload="">
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 
 		<marquee>
-			<h2><b><i>welcome to grade management system.....</i></b></h2>
+			<h2>
+				<b><i>welcome to grade management system.....</i></b>
+			</h2>
 		</marquee>
 	</div>
 </body>

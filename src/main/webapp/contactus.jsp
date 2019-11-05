@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
 <meta charset="ISO-8859-1">
 <title>Grade Management system</title>
@@ -26,13 +26,10 @@ else
 </script>
 </head>
 <body>
-<div id="header"></div>
-
-
-	<br>
-	<br>
-	<h1 align=center>
-	<img src="images/contact-us-banner.jpg" height=300 width=1100></img></h1>
+	<div id="header"></div>
+	<h1 align="center">
+		<img src="images/contact-us-banner.jpg" height=300 width=1100></img>
+	</h1>
 	<h3 align=center>
 		<b>we want to hear from you</b>
 	</h3>

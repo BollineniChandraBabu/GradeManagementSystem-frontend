@@ -23,12 +23,13 @@ function AddNewStudent(){
     var address = document.getElementById("address").value;
     var formData ="name=" + name + "&fathername=" + fathername+ "&dob=" + dob + "&department=" + department+ "&address=" + address;
     console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/addStudent.do?"+ formData;
+var url ="http://localhost:9000/addStudent?"+ formData;
     $.get(url, function(response){
         console.log("AddNewstudent:"+response);
        var data=JSON.parse(response);
        if(data!=null){
 			document.getElementById("registermsg").innerHTML="successfully added.....<br><b>Student ID:"+data;
+			document.getElementById("submit").disabled = true;
            }
 
      });
@@ -62,11 +63,13 @@ function checkName()
 	if(nameRegex.test(name))
 	{
 	document.getElementById("registermsg").innerHTML="";
+	document.getElementById("submit").disabled = false;
 	}
 else
 	{
 	document.getElementById("registermsg").innerHTML="enter alphabets only";
 	   document.getElementById("name").focus();
+	   document.getElementById("submit").disabled = true;
 	}
 }
 
@@ -77,14 +80,31 @@ function checkFName()
 	if(nameRegex.test(name))
 	{
 	document.getElementById("registermsg").innerHTML="";
+	document.getElementById("submit").disabled = false;
 	}
 else
 	{
 	document.getElementById("registermsg").innerHTML="enter alphabets only";
+	document.getElementById("submit").disabled = true;
 	   document.getElementById("fathername").focus();
 	}
 }
-
+function checkAddress()
+{
+	var name=document.getElementById("address").value;
+	var nameRegex= /^[A-Za-z\s]*$/;
+	if(nameRegex.test(name))
+	{
+	document.getElementById("registermsg").innerHTML="";
+	document.getElementById("submit").disabled = false;
+	}
+else
+	{
+	document.getElementById("registermsg").innerHTML="enter alphabets only";
+	document.getElementById("submit").disabled = true;
+	   document.getElementById("address").focus();
+	}
+}
 </script>
 <script>
 funtion getMaxdate()
@@ -103,6 +123,7 @@ funtion getMaxdate()
 	today = yyyy+'-'+mm+'-'+dd;
 	document.getElementById("datefield").setAttribute("max", today);
 }
+
 </script>
 
 
@@ -122,32 +143,40 @@ funtion getMaxdate()
 					<div id="registermsg" align=center style="color: red;"></div>
 					<form method="post" onsubmit="AddNewStudent()">
 						<div class="form-group">
-							<input type="text" class="form-control" name="name"
-								id="name" placeholder="Student name" required="required" onfocusout="checkName()">
+							<input type="text" class="form-control" name="name" id="name"
+								placeholder="Student name" required="required"
+								onkeypress="checkName()" onfocusout="checkName()">
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="fathername"
-								id="fathername" placeholder="Student father name" required="required" onfocusout="checkFName()">
+								id="fathername" placeholder="Student father name"
+								required="required" onkeypress="checkFName()"
+								onfocusout="checkFName()">
+						</div>
+						Select Date of Birth:
+						<div class="form-group">
+							<input type="date" class="form-control" name="dob" id="dob"
+								required="required">
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" name="dob" id="dob" required="required">
+							<input type="hidden" class="form-control" name="department"
+								id="department" placeholder="department" value='1'
+								required="required" onfocusout="checkDepartment()">
 						</div>
 						<div class="form-group">
-							<input type="hidden" class="form-control" name="department" id="department"
-								placeholder="department" value='1' required="required" onfocusout="checkDepartment()">
+							<input type="text" class="form-control" name="address"
+								id="address" placeholder="enter student address"
+								required="required" onkeypress="checkAddress()"
+								onfocusout="checkAddress()">
 						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" name="address" id="address"
-								placeholder="enter student address" required="required">
-						</div>
-						
+
 						<div class="form-group" align=center>
-							<button type="submit" class="btn btn-primary btn-xs">submit</button>
+							<button type="submit" class="btn btn-primary btn-xs" id="submit">submit</button>
 							&nbsp;
 							<button type="reset" class="btn btn-primary btn-xs">clear</button>
-						</div>					
+						</div>
 					</form>
-				</div>			
+				</div>
 			</div>
 		</div>
 	</div>

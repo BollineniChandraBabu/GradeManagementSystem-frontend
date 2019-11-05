@@ -13,15 +13,16 @@
 </script>
 </head>
 <body>
-<div id="mySidenav" class="sidenav">
-  <a href="AdminLogin.jsp" id="about">Home</a>
-  <a href="contactus.jsp" id="blog" class="active">Contact Us</a>
-  <a href="logout.jsp" id="projects">Logout</a>
-</div>
+	<div id="mySidenav" class="sidenav">
+		<a href="AdminLogin.jsp" id="about">Home</a> <a href="contactus.jsp"
+			id="blog" class="active">Contact Us</a> <a href="logout.jsp"
+			id="projects">Logout</a>
+	</div>
 
 	<div class="container">
-	
-	<nav class="navbar navbar-expand-sm fixed-top" style="background-color: orange;">
+
+		<nav class="navbar navbar-expand-sm fixed-top"
+			style="background-color: orange;">
 			<a class="navbar-brand" href="#">Grade Management System</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarsExampleDefault"
@@ -40,6 +41,11 @@
 					<li class="nav-item"><a class="nav-link" href="logout.jsp"
 						target=_top><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
 				</ul>
+				<ul class="dropdown-menu">
+					<li>chandra babu
+					<li>
+				</ul>
 			</div>
-		</nav></div>
+		</nav>
+	</div>
 </html>
