@@ -202,20 +202,20 @@ function displayName()
         }
 </script>
 </head>
-
-<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();"
-	onUnload="">
-	<div class="vertical-menu">
-		<a href="" onclick="viewGrade()">View/Upgrade grade range</a> <a
-			href="" onclick="viewTop()">View topper Score</a> <a href=""
-			onclick="viewBySubjects()">Search by subject ID/Name</a> <a
-			href="AddNewEmployee.jsp">Add Employee</a> <a href=""
-			onclick="viewEmployees()">View all Employee's</a> <a
-			href="AddNewStudent.jsp">Add Student</a> <a href=""
-			onclick="viewStudents()">View all students</a> <a href=""
-			onclick="viewbyid()">View student Marks</a> <a href=""
-			onclick="viewbygrade()">View Marks By Grade</a> <a href=""
-			onclick="viewallmarks2()">View all students Marks</a>
+<!--onLoad=onLoading a page it will call that method onpageshow=it will execute when page is showing-->
+<!-- The persisted property returns a Boolean value that indicates if the webpage is loaded directly from the server, or if the page is cached, when an onpageshow or onpagehide event occurs. -->
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" >
+	<div class="vertical-menu"><br><br>
+		<a href="" onclick="viewGrade()">View/Upgrade grade range</a>
+		 <a	href="" onclick="viewTop()">View topper Score</a> 
+		 <a href="" onclick="viewBySubjects()">Search by subject ID/Name</a> 
+		 <a	href="AddNewEmployee.jsp">Add Employee</a> 
+		 <a href=""	onclick="viewEmployees()">View all Employee's</a> 
+		 <a	href="AddNewStudent.jsp">Add Student</a> 
+		 <a href=""	onclick="viewStudents()">View all students</a> 
+		 <a href="" onclick="viewbyid()">View student Marks</a> 
+		 <a href=""	onclick="viewbygrade()">View Marks By Grade</a> 
+		 <a href="" onclick="viewallmarks2()">View all students Marks</a>
 		<div id="output"></div>
 	</div>
 </body>

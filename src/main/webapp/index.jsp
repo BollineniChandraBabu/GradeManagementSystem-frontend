@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">

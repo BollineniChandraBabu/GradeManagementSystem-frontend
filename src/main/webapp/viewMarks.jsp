@@ -33,9 +33,10 @@ function checkCaptcha()
     console.log("captcha :"+captcha +"  userCaptcha:"+userCaptcha +"  result:"+result);
 	 if(result==0)
 	 {
+		 document.getElementById('viewmarks').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
 		 generateRandomString();
 		 getMarks();
-	}
+		 	}
 	 else
 		 {
 		 document.getElementById("viewmarks").innerHTML="Invalid Captcha";

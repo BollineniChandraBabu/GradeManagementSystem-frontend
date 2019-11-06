@@ -290,13 +290,14 @@ function getMarks(){
 				console.log("return:" +grade);
 				content+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
 				content+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
-				
 	  document.getElementById("viewmarks").innerHTML =content;
 	         }
 	         else{
 	        	 content+=  "<br><br><center>Marks Not Available.....</center>";
 	       	  document.getElementById("viewmarks").innerHTML =content;
 	         }
+	         document.getElementById("viewmarks").innerHTML +="<br><center><button onclick='printMarks();'><img src='images/printer.jpg' width=50px height=50px></button></center>";
+
 	    });  
 }
 
@@ -379,7 +380,8 @@ function viewallmarks2(){
     });
      }
 function printMarks() {
-	let printContents = document.getElementById("viewmarks").innerHTML;
+	let printContents ="<h3 align=center><u>Grade Management System</u></h3><br>";
+	printContents += document.getElementById("viewmarks").innerHTML;
 	let originalContents = document.body.innerHTML;
 	document.body.innerHTML = printContents;
 	window.print();

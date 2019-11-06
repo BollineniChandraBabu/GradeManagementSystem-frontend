@@ -1,9 +1,17 @@
 body {
+	height:40em;
 	background-image: url('../images/gms.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	width:auto;
 	position: relative;
 	opacity: 1;
 	filter: alpha(opacity = 30);
+	  background-position:50% 50%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
+
+ 
