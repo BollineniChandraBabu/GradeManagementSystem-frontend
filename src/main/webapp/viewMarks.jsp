@@ -9,38 +9,36 @@
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/viewGrades.js"></script>
-<script>
-function clearData()
-{
-	document.getElementById("viewmarks").innerHTML+="";	
-}
-function generateRandomString()
-{
-	document.getElementById("captcha").innerHTML="";
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < 6; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  document.getElementById("captcha").innerHTML+="<b><label id='cap'>"+text+"</label> &nbsp;&nbsp; &nbsp;<input type='button' class='btn btn-primary btn-xs' onclick='generateRandomString()' value='re captcha'></b>";	
-}
+  <script type="text/javascript">
+      function get_action() 
+      {
+          var v = grecaptcha.getResponse();
+          if(v.length == 0)
+          {
+              return false;
+          }
+          else
+          {
+              return true; 
+          }
+      }
+    </script>
 
+<script>
 function checkCaptcha()
 {
 	 event.preventDefault();
-	 let captcha = document.getElementById("cap").textContent;
-	 let userCaptcha = document.getElementById("random").value;
-    var result= captcha.localeCompare(userCaptcha)
-    console.log("captcha :"+captcha +"  userCaptcha:"+userCaptcha +"  result:"+result);
+	 let result = get_action();
+	
 	 if(result==0)
 	 {
-		 document.getElementById('viewmarks').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
-		 generateRandomString();
-		 getMarks();
+		 document.getElementById("viewmarks").innerHTML="You can't leave Captcha Code empty";
 		 	}
 	 else
 		 {
-		 document.getElementById("viewmarks").innerHTML="Invalid Captcha";
-		 document.getElementById("random").focus();
+		 document.getElementById('viewmarks').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
+		 grecaptcha.reset();
+		 getMarks();
 		 }
 }
 </script>
@@ -62,11 +60,8 @@ function checkCaptcha()
 						</div>
 						
 						<div class="form-group">
-						<div id="captcha" align="center"></div>
-							<input type="text" class="form-control" name="random" id="random"
-								placeholder="Enter Captcha" required="required" >
+						<div class="g-recaptcha" align="center" data-sitekey="6LcafcEUAAAAALxQKwXQYXT0qaoh9UkMhYFLUcs9"></div>
 						</div>
-						
 						
 						<div class="form-group" align=center>
 							<button type="submit" class="btn btn-primary btn-xs">Search</button>
@@ -87,11 +82,8 @@ function checkCaptcha()
 		<jsp:include page="footer.html"></jsp:include>
 	</div>
 </body>	
-
-<script>
-generateRandomString();
+<!-- The defer attribute tells the browser that it should go on working with the page, and load the script in background, then run the script when it loads.-->
+<!--async: script is completely independent, The page doesn’t wait for async scripts-->
+<script src="https://www.google.com/recaptcha/api.js" async defer>
 </script>
-
-
-
 </html>

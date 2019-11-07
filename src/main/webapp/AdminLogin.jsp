@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
@@ -16,31 +16,12 @@
             window.history.forward();
         }
 </script>
-
-<script>
-function getter(){
-var roles=(localStorage.getItem("role"));
-if(roles=='New')
-{
-	 window.location.href="index.jsp";
-}
-}
-</script>
 </head>
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();"
 	onUnload="">
 	<jsp:include page="LoginHeader.jsp"></jsp:include>
 
-	<div id="mySidenav" class="sidenav">
-		<a href="https://www.facebook.com/RevatureIndia" id="about"
-			target="_blank"><img src='images/facebook.png' width="15px"
-			height="15px">facebook</a> <a
-			href="https://twitter.com/WeAreRevature" id="blog" target="_blank"><img
-			src='images/twitter.png' width="15px" height="15px"> Twitter</a> <a
-			href="https://www.linkedin.com/company/revature" id="projects"
-			target="_blank"><img src='images/linkedin.jpg' width="15px"
-			height="15px"> Linkedin</a>
-	</div>
+	
 	<br>
 	<br>
 	<br>
@@ -72,7 +53,7 @@ if(roles=='New')
 		<jsp:include page="footer.html"></jsp:include>
 	</div>
 </body>
-<script>getter();</script>
+<script>adminGetter();</script>
 <script>
 function doDate()
 {

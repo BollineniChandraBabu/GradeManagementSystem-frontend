@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
@@ -17,15 +17,6 @@
             window.history.forward();
         }
 </script>
-<script>
-function getter(){
-var roles=(localStorage.getItem("role"));
-if(roles=='New')
-{
-	 window.location.href="index.jsp";
-}
-}
-</script>
 
 </head>
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();"
@@ -33,7 +24,7 @@ if(roles=='New')
 	<jsp:include page="userLoginHeader.jsp"></jsp:include>
 
 	<div id="mySidenav" class="sidenav">
-		<a href="UserLogin.jsp" id="about">Home</a> <a href="contactus.jsp"
+		<a href="UserLogin.jsp" id="about">Home</a> <a href="contactus.html"
 			id="blog">Contact Us</a> <a href="logout.jsp" id="projects">Logout</a>
 	</div>
 	<br>
@@ -52,8 +43,9 @@ if(roles=='New')
 		</div>
 	</h5>
 	<div id="mySidenav" class="sidenav">
-		<a href="UserLogin.jsp" id="about">Home</a> <a href="contactus.jsp"
-			id="blog">Contact Us</a> <a href="logout.jsp" id="projects">Logout</a>
+				<a href="https://www.facebook.com/RevatureIndia" id="about" target="_blank"><img src='images/facebook.png' width="15px" height="15px">facebook</a>
+		 <a href="https://twitter.com/WeAreRevature" id="blog" target="_blank"><img src='images/twitter.png' width="15px" height="15px"> Twitter</a>
+		  <a href="https://www.linkedin.com/company/revature" id="projects" target="_blank"><img src='images/linkedin.jpg' width="15px" height="15px"> Linkedin</a>
 	</div>
 	<div class="container">
 		<div class="row">
@@ -67,7 +59,7 @@ if(roles=='New')
 	<br>
 	<jsp:include page="footer.html"></jsp:include>
 </body>
-<script>getter();</script>
+<script>userGetter();</script>
 <script>
 function doDate()
 {

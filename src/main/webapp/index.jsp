@@ -5,6 +5,7 @@
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/look.css">
+<script type="text/javascript" src="js/viewGrades.js"></script>
 <script type="text/javascript">
         window.history.forward();
         function noBack()
@@ -33,5 +34,7 @@
 <br>
 <br>
 <jsp:include page="footer.html"></jsp:include>
-
+<script>
+getter();
+</script>
 </html>

@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div id="mySidenav" class="sidenav">
-		<a href="AdminLogin.jsp" id="about">Home</a> <a href="contactus.jsp"
+		<a href="AdminLogin.jsp" id="about">Home</a> <a href="contactus.html"
 			id="blog" class="active">Contact Us</a> <a href="logout.jsp"
 			id="projects">Logout</a>
 	</div>
@@ -36,7 +36,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/GMS-frontend/AdminLogin.jsp" target=_top><span
 							class="glyphicon glyphicon-home"></span>Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="contactus.jsp"
+					<li class="nav-item"><a class="nav-link" href="contactus.html"
 						target=_top>Contact Us</a></li>
 					<li class="nav-item"><a class="nav-link" href="logout.jsp"
 						target=_top><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>

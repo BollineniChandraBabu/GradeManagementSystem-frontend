@@ -28,7 +28,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="/GMS-frontend/UserLogin.jsp" target=_top><span
 							class="glyphicon glyphicon-home"></span>Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="contactus.jsp"
+					<li class="nav-item"><a class="nav-link" href="contactus.html"
 						target=_top>Contact Us</a></li>
 					<li class="nav-item"><a class="nav-link" href="logout.jsp"
 						target=_top>Logout</a></li>

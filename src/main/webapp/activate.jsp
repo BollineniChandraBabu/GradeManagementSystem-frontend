@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <script>
 	function msg() {
 		$("#myModal").modal();
@@ -18,8 +19,8 @@
 		var id = document.getElementById("eid").value;
 		var email = document.getElementById("email").value;
 		var password = document.getElementById("password").value;
-		var formData = "eid=" + id + "&email=" + email + "&password="
-				+ password;
+		 var hash = CryptoJS.MD5(password);
+		var formData = "eid=" + id + "&email=" + email + "&password="+hash;
 		console.log(formData);
 		var url = "http://localhost:9000/activateEmployee?" + formData;
 		$

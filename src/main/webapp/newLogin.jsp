@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <script>
 function msg()  
 {  
@@ -19,7 +20,8 @@ function login(){
   	var email = document.getElementById("email").value;
   	
     var password = document.getElementById("password").value;
-    var formData = "email=" + email + "&password=" + password;
+    var hash = CryptoJS.MD5(password);
+    var formData = "email=" + email + "&password=" + hash;
     console.log(formData);
 var url ="http://localhost:9000/login?"+ formData;
     $.get(url, function(response){
@@ -30,20 +32,17 @@ var url ="http://localhost:9000/login?"+ formData;
        window.localStorage.setItem('userdata', email);
        if (data.length!=0)
       {
-           <%
-           session.setAttribute("emails", "@gmail.com");%>
+           <% session.setAttribute("emails", "@gmail.com");%>
            
        if(data.roles)
            {
  		  document.getElementById('login').innerHTML = '<br><br><center><img src="images/squarespace-logo-symbol-black.gif" width=500px height=500px /></center>';
-		   sleep(20000);
     	   window.localStorage.setItem('role', 'Admin');
              window.location.href="AdminLogin.jsp";
            }
        else
            {
    		  document.getElementById('login').innerHTML = '<br><br><center><img src="images/squarespace-logo-symbol-black.gif" width=500px height=500px /></center>';
-    		 sleep(20000);
     	   window.localStorage.setItem('role', 'User');
            console.log("user login");
            
@@ -59,10 +58,6 @@ var url ="http://localhost:9000/login?"+ formData;
      });
     }
 
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
- }
 </script>
 <script type="text/javascript">
         window.history.forward();

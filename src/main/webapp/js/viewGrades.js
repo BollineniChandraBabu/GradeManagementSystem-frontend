@@ -1,4 +1,4 @@
-
+/*
 function viewGrade1(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
@@ -6,7 +6,7 @@ function viewGrade1(){
     $.get(url, function(response){
         console.log(response);
        let data=response;
-       let content="<br><br><br><table border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
+       let content="<br><br><br><table class='table table-hover table-bordered'><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
 	for( let grades of data)
 		{
 		content +="<tr><td>"+grades.grade +"</td><td>"+grades.minMark+"</td><td>"+grades.maxMark+ "</td></tr>";
@@ -14,7 +14,7 @@ function viewGrade1(){
        document.getElementById("viewdetails").innerHTML=content;
      });
     }
-
+*/
 function viewTop(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
@@ -26,13 +26,13 @@ function viewTop(){
         let total=0;
         let sid=0;
         let content= "<br><div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse'>Viewing Topper Details....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
-       content+="<table class='table table-hover' border='1'><tr><th>Registration number</th><th>Name</th></tr>";
+       content+="<table class='table table-hover table-bordered'><tr><th>Registration number</th><th>Name</th></tr>";
  	for( let marks of data)
  		{
  		content +="<tr><td>"+marks.student.registrationNumber+"</td><td>"+marks.student.name+"</td></tr></table>";
  		break;
  		}
-        let contents="<table class='table table-hover' border=1><tr><th>Subject Id</th><th>Subject Name</th><th>Marks</th></tr>";
+        let contents="<table class='table table-hover table-bordered'><tr><th>Subject Id</th><th>Subject Name</th><th>Marks</th></tr>";
      	for(let mark of data)
     		{
      		++count;
@@ -50,7 +50,7 @@ function viewTop(){
         
       });
      }
-      
+  /*    
 function viewallmarks1(){
     event.preventDefault();
 	  document.getElementById('viewdetails').innerHTML = '<br><br><img src="images/loader.gif" width=300px height=150px/>';
@@ -59,7 +59,7 @@ function viewallmarks1(){
         console.log(response);
     });
      }
-    
+    */
 
 function getGrade(total){
     let sum=total;
@@ -92,7 +92,7 @@ function viewGrade(){
         let globalcount=100;
        let data=response;
        let content="<br><div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse'>Available Grades....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
-       content+="<div align='center' id='mesg'></div><form method='get' onsubmit='upgradeGrade()'><table class='table table-hover' border=1><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
+       content+="<div align='center' id='mesg'></div><form method='get' onsubmit='upgradeGrade()'><table class='table table-hover table-bordered'><tr><th>Grade</th><th>Minimum Marks</th><th>Maximum Marks</th></tr>";
 	for( let grades of data)
 		{
 		if(grades.minMark!=0 && grades.maxMark!=100){
@@ -219,21 +219,7 @@ $.get(url, function(response){
 });
 }
 	catch(err){ 
-		/*console.log(err.message);
-		console.log(globalcount);	
-	let grade=document.getElementById(globalcount).value;
-	console.log(grade);
-	let minmark=document.getElementById('last').value;
-	console.log(minmark);
-	let maxmark=document.getElementById(numb+2).value;	
-	console.log(maxmark);
-	let formData = "grade=" + grade + "&minimummark=" + minmark+ "&maximummark=" + maxmark;
-	console.log(formData);
-	let url ="http://localhost:9000/updateGrade?"+ formData;
-	console.log(url);
-	$.get(url, function(response){
-		 console.log(grade +":" +response);
-	});*/
+		console.log(err);
 }}}
     
 function calgrade(sum){
@@ -266,7 +252,7 @@ function getMarks(){
 	    	 console.log(response);
 	         let data=response;
 	         let content;
-	         content="<table class='table table-hover' border=1>" ;
+	         content="<table class='table table-hover table-bordered'>" ;
 	         let count=0;
 	         let total=0;
 	         let sid=0;
@@ -334,7 +320,7 @@ function viewallmarks2(){
         console.log(response);
         let data=response;
         let content;
-        content="<table class='table table-hover' border=1>" ;
+        content="<table class='table table-hover table-bordered'>" ;
         let sid=0;
         let count=0;
         let total=0;
@@ -426,7 +412,7 @@ function getMarksbygrade()
 	    $.get(url, function(response){
 	        console.log(response);
 	        let data=response;
-	        content+="<table class='table table-hover' border=1>" ;
+	        content+="<table class='table table-hover table-bordered'>" ;
 	        let sid=0;
 	        let count=0;
 	        let total=0;
@@ -467,7 +453,7 @@ function getMarksbygrade()
 			  catch(error){console.error(error);}}
 	       tempcontent+=  "<tr><th colspan=2>Total Marks :</th><th colspan=2>"+total  +"</th></tr>";
 	        console.log("count :"+count)
-			let sum=Math.ceil(total/6);
+			let sum=Math.ceil(total/count);
 			 let grade=calgrade(sum);
 			tempcontent+=  "<tr><th colspan=2>Grade :</th><th colspan=2>"+grade  +"</th></tr>";
 			if(grade===checkgrade){
@@ -493,7 +479,7 @@ var url ="http://localhost:9000/viewStudents";
        var data=response;
        var content;
        content="<div id='accordion'><div class='card'><div class='card-header'><a class='card-link' data-toggle='collapse' >Viewing All Students Details....</a></div><div id='collapseOne' class='collapse show' data-parent='#accordion'><div class='card-body'>";
-       content+="<table class='table table-hover' border=1> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
+       content+="<table class='table table-hover table-bordered'> <tr><th>ID</th><th>Name</th><th>Father Name</th><th>Address</th><th>Date of Birth</th></tr>";
        for( let users of data)
 		{
 			content+="<tr><td>"+users.registrationNumber+"</td><td>"+users.name+"</td><td>"+users.fatherName+"</td><td>"+users.address+"</td><td>"+users.dateOfBirth+"</td></tr>";
@@ -503,3 +489,31 @@ var url ="http://localhost:9000/viewStudents";
      });
     }    
 
+
+function adminGetter(){
+	var roles=null;
+roles=(localStorage.getItem("role"));
+console.log(roles);
+if(roles=='New' | roles==null)
+{
+	 window.location.href="index.jsp";
+}
+if(roles=='User')
+{
+	 window.location.href="UserLogin.jsp";
+}
+}
+
+function userGetter(){
+	var roles=null;
+roles=(localStorage.getItem("role"));
+console.log(roles);
+if(roles=='New' | roles==null)
+{
+	 window.location.href="index.jsp";
+}
+if(roles=='Admin')
+{
+	 window.location.href="AdminLogin.jsp";
+}
+}

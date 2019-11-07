@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>Grade Management system</title>
 <link rel="icon" href="images/gms-logo.png" type="image/x-icon">
@@ -29,7 +28,6 @@ var url ="http://localhost:9000/addEmployee?"+ formData;
        if(data!=null){
 			document.getElementById("registermsg").innerHTML="successfully added.....<br><b>Employee ID:"+data;
            }
-
      });
     }
 
@@ -62,44 +60,12 @@ function checkDepartment(){
     	content +="Select Department :<select class='custom-select custom-select-sm' id='department'>";
     	for(let department of data)
     		{
-    		
     		content+="<option value="+department.id+">"+department.name+"</option>";
     		}
        content+=" </select>";
        document.getElementById("dept").innerHTML=content;
      });
     }
-	
-	function checkName()
-{
-	var name=document.getElementById("name").value;
-	var nameRegex= /^[A-Za-z\s]*$/;
-	if(nameRegex.test(name))
-	{
-	document.getElementById("registermsg").innerHTML="";
-	}
-else
-	{
-	document.getElementById("registermsg").innerHTML="enter alphabets only";
-	   document.getElementById("name").focus();
-	}
-}
-
-function checkFName()
-{
-	var name=document.getElementById("fathername").value;
-	var nameRegex= /^[A-Za-z\s]*$/;
-	if(nameRegex.test(name))
-	{
-	document.getElementById("registermsg").innerHTML="";
-	}
-else
-	{
-	document.getElementById("registermsg").innerHTML="enter alphabets only";
-	   document.getElementById("fathername").focus();
-	}
-}
-
 	
 </script>
 </head>
@@ -118,14 +84,13 @@ else
 					<div id="registermsg" align=center style="color: red;"></div>
 					<form method="post" onsubmit="AddNewEmployee()">
 						<div class="form-group">
-							<input type="text" class="form-control" name="name" id="name"
-								placeholder="employee name" required="required"
-								onfocusout="checkName()">
+							<input type="text" class="form-control" name="name" id="name" pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only"
+								placeholder="employee name" required="required">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="fathername"
+							<input type="text" class="form-control" name="fathername" pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only"
 								id="fathername" placeholder="employee father name"
-								required="required" onfocusout="checkFName()">
+								required="required">
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-control" name="email" id="email"

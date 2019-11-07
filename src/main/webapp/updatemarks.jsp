@@ -45,7 +45,7 @@ function getSubjects(){
        document.getElementById("subjects").innerHTML=content;
     });  
 }
-
+/*
 function checksubjectId(){
     event.preventDefault();
     var subject = document.getElementById("subject").value;
@@ -67,7 +67,7 @@ function checksubjectId(){
            }
      });
     }
-
+*/
 function insertMarks(){
     event.preventDefault();
 	var id = document.getElementById("id").value;

@@ -34,79 +34,6 @@ var url ="http://localhost:9000/addStudent?"+ formData;
 
      });
     }
-
-
-function checkDepartment(){
-    event.preventDefault();
-  	var department = document.getElementById("department").value;
-    var formData ="department=" + department;
-    console.log(formData);
-var url ="http://localhost:8080/GMS-api/FrontController/checkDepartment.do?"+ formData;
-    $.get(url, function(response){
-       var data=JSON.parse(response);
-       if(data.result==false){
-    	   document.getElementById("registermsg").innerHTML="department doesn't exist....";
-    	   document.getElementById("department").focus();
-       }
-       else
-           {
-    	   document.getElementById("registermsg").innerHTML="";
-           }
-     });
-    }
-
-
-function checkName()
-{
-	var name=document.getElementById("name").value;
-	var nameRegex= /^[A-Za-z\s]*$/;
-	if(nameRegex.test(name))
-	{
-	document.getElementById("registermsg").innerHTML="";
-	document.getElementById("submit").disabled = false;
-	}
-else
-	{
-	document.getElementById("registermsg").innerHTML="enter alphabets only";
-	   document.getElementById("name").focus();
-	   document.getElementById("submit").disabled = true;
-	}
-}
-
-function checkFName()
-{
-	var name=document.getElementById("fathername").value;
-	var nameRegex= /^[A-Za-z\s]*$/;
-	if(nameRegex.test(name))
-	{
-	document.getElementById("registermsg").innerHTML="";
-	document.getElementById("submit").disabled = false;
-	}
-else
-	{
-	document.getElementById("registermsg").innerHTML="enter alphabets only";
-	document.getElementById("submit").disabled = true;
-	   document.getElementById("fathername").focus();
-	}
-}
-function checkAddress()
-{
-	var name=document.getElementById("address").value;
-	var nameRegex= /^[A-Za-z\s]*$/;
-	if(nameRegex.test(name))
-	{
-	document.getElementById("registermsg").innerHTML="";
-	document.getElementById("submit").disabled = false;
-	}
-else
-	{
-	document.getElementById("registermsg").innerHTML="enter alphabets only";
-	document.getElementById("submit").disabled = true;
-	   document.getElementById("address").focus();
-	}
-}
-</script>
-<script>
 funtion getMaxdate()
 {
 	var today = new Date();
@@ -123,10 +50,7 @@ funtion getMaxdate()
 	today = yyyy+'-'+mm+'-'+dd;
 	document.getElementById("datefield").setAttribute("max", today);
 }
-
 </script>
-
-
 </head>
 <body>
 	<jsp:include page="AdminLogin.jsp"></jsp:include>
@@ -143,31 +67,25 @@ funtion getMaxdate()
 					<div id="registermsg" align=center style="color: red;"></div>
 					<form method="post" onsubmit="AddNewStudent()">
 						<div class="form-group">
-							<input type="text" class="form-control" name="name" id="name"
-								placeholder="Student name" required="required"
-								onkeypress="checkName()" onfocusout="checkName()">
+							<input type="text" class="form-control" name="name" id="name" placeholder="Student name" required pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="fathername"
-								id="fathername" placeholder="Student father name"
-								required="required" onkeypress="checkFName()"
+							<input type="text" class="form-control" name="fathername" id="fathername" placeholder="Student father name" required pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only"
 								onfocusout="checkFName()">
 						</div>
 						Select Date of Birth:
 						<div class="form-group">
 							<input type="date" class="form-control" name="dob" id="dob"
-								required="required">
+								required>
 						</div>
 						<div class="form-group">
 							<input type="hidden" class="form-control" name="department"
-								id="department" placeholder="department" value='1'
-								required="required" onfocusout="checkDepartment()">
+								id="department" placeholder="department" value='1' required>
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="address"
 								id="address" placeholder="enter student address"
-								required="required" onkeypress="checkAddress()"
-								onfocusout="checkAddress()">
+								required>
 						</div>
 
 						<div class="form-group" align=center>
@@ -193,14 +111,10 @@ var yyyy = today.getFullYear()-'5';
     if(mm<10){
         mm='0'+mm
     } 
-
 var todayStr = yyyy+'-'+mm+'-'+dd;
 document.getElementById("dob").setAttribute("max", todayStr);
 var minyyyy = today.getFullYear()-'20';
-
 mintoday = minyyyy+'-'+mm+'-'+dd;
 document.getElementById("dob").setAttribute("min", mintoday);
-
 </script>
-
 </html>
