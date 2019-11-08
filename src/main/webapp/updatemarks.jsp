@@ -12,14 +12,17 @@ function msg()
 {  
 	 $("#myModal").modal();
 }  
-
+function clearMessage()
+{
+	document.getElementById("marksinsertmsg").innerHTML="" ; 
+	}
 function getStudents(){
     let url ="http://localhost:9000/viewStudents";
     $.get(url, function(response){
     	data=response;
     	console.log(data);
     	let content="";
-    	content +="<select class='custom-select custom-select-sm' id='id'>";
+    	content +="<select class='custom-select custom-select-sm' id='id' onchange='clearMessage()'>";
     	for(let students of data)
     		{
     		console.log(students.registrationNumber+students.name);
@@ -35,7 +38,7 @@ function getSubjects(){
     	data=response;
     	console.log(data);
     	let content="";
-    	content +="<select class='custom-select custom-select-sm' id='subject'>";
+    	content +="<select class='custom-select custom-select-sm' id='subject' onchange='clearMessage()'>";
     	for(let students of data)
     		{
     		console.log(students.id+students.name);
@@ -45,29 +48,6 @@ function getSubjects(){
        document.getElementById("subjects").innerHTML=content;
     });  
 }
-/*
-function checksubjectId(){
-    event.preventDefault();
-    var subject = document.getElementById("subject").value;
-    var formData="subjectdetails=" +subject.trim(); 
-       console.log(formData);
-   var url ="http://localhost:8080/GMS-api/FrontController/checkSubject.do?"+formData;
-  $.get(url, function(response){
-      console.log(response);
-      var data=JSON.parse(response);
-      var content;
-      if(data!=null)
-      {
-    	   document.getElementById("marksinsertmsg").innerHTML="Subject Name: "+data.name ;
-       }
-       else
-           {
-    	   document.getElementById("marksinsertmsg").innerHTML="subject not available...";
-    	   document.getElementById("subject").focus();
-           }
-     });
-    }
-*/
 function insertMarks(){
     event.preventDefault();
 	var id = document.getElementById("id").value;

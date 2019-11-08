@@ -34,22 +34,7 @@ var url ="http://localhost:9000/addStudent?"+ formData;
 
      });
     }
-funtion getMaxdate()
-{
-	var today = new Date();
-	var dd = today.getDate();
-	var mm = today.getMonth()+1; //January is 0!
-	var yyyy = today.getFullYear();
-	 if(dd<10){
-	        dd='0'+dd
-	    } 
-	    if(mm<10){
-	        mm='0'+mm
-	    } 
 
-	today = yyyy+'-'+mm+'-'+dd;
-	document.getElementById("datefield").setAttribute("max", today);
-}
 </script>
 </head>
 <body>
@@ -67,11 +52,10 @@ funtion getMaxdate()
 					<div id="registermsg" align=center style="color: red;"></div>
 					<form method="post" onsubmit="AddNewStudent()">
 						<div class="form-group">
-							<input type="text" class="form-control" name="name" id="name" placeholder="Student name" required pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only">
+							<input type="text" class="form-control" autocomplete="off" name="name" id="name" placeholder="Student name" required pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="fathername" id="fathername" placeholder="Student father name" required pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only"
-								onfocusout="checkFName()">
+							<input type="text" class="form-control" autocomplete="off" name="fathername" id="fathername" placeholder="Student father name" required pattern="^[A-Za-z\s]*$" title="Name should contain alphabets only">
 						</div>
 						Select Date of Birth:
 						<div class="form-group">
@@ -83,7 +67,7 @@ funtion getMaxdate()
 								id="department" placeholder="department" value='1' required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="address"
+							<input type="text" class="form-control" name="address" autocomplete="off"
 								id="address" placeholder="enter student address"
 								required>
 						</div>

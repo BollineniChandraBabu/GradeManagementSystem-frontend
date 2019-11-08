@@ -5,16 +5,11 @@
     final String to = "chandrababubollineni416@gmail.com";
     final String subject = request.getParameter("sub");
     final String messg =" Mail from: "+request.getParameter("mail")+"\n"+"Content: "+request.getParameter("mess");
- 
     final String from = "chandrababubollineni416@gmail.com";
     final String pass = "ionhgayiisjwiudj";
- 
- 
-    String host = "smtp.gmail.com";
- 
+  
     Properties props = new Properties();
- 
-    props.put("mail.smtp.host", host);
+    props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.transport.protocol", "smtp");
     props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.starttls.enable", "true");
