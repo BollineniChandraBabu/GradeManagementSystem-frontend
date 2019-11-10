@@ -34,7 +34,5 @@
 <br>
 <br>
 <jsp:include page="footer.html"></jsp:include>
-<script>
-getter();
-</script>
+
 </html>

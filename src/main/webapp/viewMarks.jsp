@@ -44,7 +44,7 @@ function checkCaptcha()
 </script>
 </head>
 <body>
-<jsp:include page="blogHeader.html"></jsp:include>
+<jsp:include page="blogHeader.html"></jsp:include><br><br><br>
 <div class=container >
 	<div id='accordion'>
 		<div class='card'>
@@ -70,6 +70,8 @@ function checkCaptcha()
 						</div>
 					</form>
 <div id="viewmarks" align="center"></div>
+<div id="viewdetails" align="center"></div>
+
 	
 	</div>
 </div></div></div></div>
@@ -83,7 +85,7 @@ function checkCaptcha()
 	</div>
 </body>	
 <!-- The defer attribute tells the browser that it should go on working with the page, and load the script in background, then run the script when it loads.-->
-<!--async: script is completely independent, The page doesnâ€™t wait for async scripts-->
+<!--async: script is completely independent, The page doesn'€™t wait for async scripts-->
 <script src="https://www.google.com/recaptcha/api.js" async defer>
 </script>
 </html>

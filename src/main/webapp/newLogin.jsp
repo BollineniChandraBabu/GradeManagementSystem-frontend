@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+ <script src="js/aes.js"></script>
 <script>
 function msg()  
 {  
@@ -48,15 +48,13 @@ var url ="http://localhost:9000/login?"+ formData;
            
    		     window.location.href="UserLogin.jsp";
            }
-       }
-       else
-           {
+       }}).fail(function() {
     	   window.localStorage.setItem('role', 'New');
 			document.getElementById("loginmsg").innerHTML="<b><i>Access Denied! Invalid credentials</i></b>";
-           }
+       });
 
-     });
-    }
+     }
+    
 
 </script>
 <script type="text/javascript">
